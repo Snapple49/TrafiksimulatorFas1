@@ -2,7 +2,7 @@
 public class Car {
 
     private int bornTime;
-    private int dest; // 1 för rakt fram, 2 för vänstersväng
+    private int dest; // 1 for forward, 2 for left turn
 
     public Car(int bornTime, int dest) {
 	this.bornTime = bornTime;
@@ -17,7 +17,7 @@ public class Car {
 	return this.dest;
     }
     
-    // konstruktor och get-metoder
+    // constructor and getter-methods
     
 
     public String toString() {
