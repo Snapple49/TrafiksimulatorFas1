@@ -10,7 +10,10 @@ public class Light {
 	this.green = green;
     }
 
-    public void    step() {
+    public int getTime() {
+    	return time;
+    }
+    public void step() {
 	this.time++;
        // Stegar fram klocka ett steg
     }

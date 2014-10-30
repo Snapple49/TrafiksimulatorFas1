@@ -24,7 +24,7 @@ public class Lane {
 	theLane[theLane.length-1] = null;
 	
     }
-
+    
     public Car getFirst() {
 	// Returnera och tag bort bilen som står först
     	Car temp = this.theLane[0];
