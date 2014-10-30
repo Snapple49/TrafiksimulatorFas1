@@ -31,7 +31,6 @@ public class Lane {
     	this.theLane[0] = null;
     	return temp;
     }
-
     public Car firstCar() {
 	// Returnera bilen som står först utan att ta bort den
 	return theLane[0];
