@@ -24,7 +24,7 @@ public class Lane {
 	theLane[theLane.length-1] = null;
 	
     }
-
+    
     public Car getFirst() {
 	// Returnera och tag bort bilen som står först
     	Car temp = this.theLane[0];
@@ -55,21 +55,21 @@ public class Lane {
 
     
     public String toString() {
-	String returnString = "Lane(";
-	for (int i = 0; i < theLane.length - 1; i++) {
-	    if(theLane[i] != null){
-	    	returnString += "theLane[" + i + "] = " + theLane[i].toString() + ", "; 
-	    }else{
-	    	returnString += "theLane[" + i + "] = empty, ";
-	    }
-	}
-	if(theLane[theLane.length - 1] != null){
-		returnString += "theLane[" + (theLane.length - 1) + "] = " + theLane[theLane.length - 1].toString() + ")";
-	}else{
-		returnString += "theLane[" + (theLane.length - 1) + "] = empty)";
-	}
-	
-	return returnString;
+    	String returnString = "Lane:\n";
+    	for (int i = 0; i < theLane.length; i++) {
+    		if(theLane[i] != null){
+    			returnString += "theLane[" + i + "] = " + theLane[i].toString() + "\n"; 
+		    }else{
+		    	returnString += "theLane[" + i + "] = empty\n";
+		    }
+		}
+		/*if(theLane[theLane.length - 1] != null){
+			returnString += "theLane[" + (theLane.length - 1) + "] = " + theLane[theLane.length - 1].toString() + ")";
+		}else{
+			returnString += "theLane[" + (theLane.length - 1) + "] = empty)";
+		}*/
+		
+		return returnString;
     }
 
     public static void main(String [] args) {

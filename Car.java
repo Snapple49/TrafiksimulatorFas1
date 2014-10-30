@@ -26,7 +26,7 @@ public class Car {
     }
 
     public static void main(String [] args) {
-	Car x = new Car(5, 2);
+	Car x = new Car(5, 1);
 	Car y = new Car(4, 1);
 	System.out.println(x.toString() + "\n" + y.toString() + "\n" + x.getBornTime() + "\n" + x.getDest());
 	
