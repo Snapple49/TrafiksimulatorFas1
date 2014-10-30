@@ -21,6 +21,7 @@ public class Lane {
 	for (int i = 1; i < theLane.length; i++) {
 	    theLane[i-1] = theLane[i]; 
 	}
+	theLane[theLane.length-1] = null;
 	
     }
 
@@ -57,9 +58,17 @@ public class Lane {
     public String toString() {
 	String returnString = "Lane(";
 	for (int i = 0; i < theLane.length - 1; i++) {
-	    returnString += "theLane[" + i + "] = " + theLane[i].toString() + ", "; 
+	    if(theLane[i] != null){
+	    	returnString += "theLane[" + i + "] = " + theLane[i].toString() + ", "; 
+	    }else{
+	    	returnString += "theLane[" + i + "] = empty, ";
+	    }
 	}
-	returnString += "theLane[" + (theLane.length - 1) + "] = " + theLane[theLane.length - 1] + ")";
+	if(theLane[theLane.length - 1] != null){
+		returnString += "theLane[" + (theLane.length - 1) + "] = " + theLane[theLane.length - 1].toString() + ")";
+	}else{
+		returnString += "theLane[" + (theLane.length - 1) + "] = empty)";
+	}
 	
 	return returnString;
     }
