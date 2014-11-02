@@ -43,8 +43,8 @@ public class TrafficSystem {
 	// med hjälp av klassernas toString-metoder
     }
 
-    public String toString() {
-	return "Lane(r0=" + this.r0 + ", r1=" + this.r1 + ", r2=" + this.r2 + ", s1=" + this.s1 ", s2=" + this.s2 + ")";
-
-
+    public String toString() { //mal = polymorfism
+	return "r0 = " + this.r0.toString() + "\nr1= " + this.r1.toString() + "\nr2= " + this.r2.toString() + "\ns1= " + this.s1.toString() + "\ns2= " + this.s2.toString() + ")";
+}
+    
 }
