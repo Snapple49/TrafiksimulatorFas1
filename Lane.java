@@ -4,6 +4,9 @@ public class Lane {
     public static class OverflowException extends RuntimeException {
         // Undantag som kastas nar det inte gick att lagga 
         // in en ny bil pa vagen
+    	public OverflowException(String errormsg){
+    		System.err.println(errormsg);
+    	}
     }
 
     private Car[] theLane;
@@ -17,12 +20,12 @@ public class Lane {
 	// Stega fram alla fordon (utom det på plats 0) ett steg 
         // (om det gar). (Fordonet på plats 0 tas bort utifrån 
 	// mm h a metoden nedan.)
-	Car firstcar = this.getFirst();
-	for (int i = 1; i < theLane.length; i++) {
-	    theLane[i-1] = theLane[i]; 
-	}
-	theLane[theLane.length-1] = null;
-	
+    	this.getFirst();
+    	for (int i = 1; i < theLane.length; i++) {
+    		theLane[i-1] = theLane[i]; 
+    	}
+		theLane[theLane.length-1] = null;
+		
     }
     
     public Car getFirst() {
@@ -44,13 +47,11 @@ public class Lane {
 
     public void putLast(Car c) throws OverflowException {
 	// Stall en bil pa sista platsen pa vagen
-	// (om det gar).
-	if (theLane[theLane.length - 1] == null) {
-	    theLane[theLane.length - 1] = c;
-	}
-	else {
-	    throw new OverflowException();
-	}
+	// (om det gar).    	
+    	if (theLane[theLane.length - 1] == null) {
+    		theLane[theLane.length - 1] = c;
+    	}else 
+    		throw new OverflowException("Could not put a car in lane");    	
     }
 
     
@@ -63,24 +64,37 @@ public class Lane {
 		    	returnString += "theLane[" + i + "] = empty\n";
 		    }
 		}
-		/*if(theLane[theLane.length - 1] != null){
-			returnString += "theLane[" + (theLane.length - 1) + "] = " + theLane[theLane.length - 1].toString() + ")";
-		}else{
-			returnString += "theLane[" + (theLane.length - 1) + "] = empty)";
-		}*/
 		
 		return returnString;
     }
 
     public static void main(String [] args) {
 	Lane newLane = new Lane(10);
-	System.out.println(newLane.toString());
-	Car car1 = new Car(5, 5);
+	System.out.println("1: " + newLane.toString());
+	Car car1 = new Car(5, 1);
 	newLane.putLast(car1);
 	newLane.step();
-	Car car2 = new Car(4, 4);
+	Car car2 = new Car(4, 2);
 	newLane.putLast(car2);
 	newLane.step();
-	System.out.println(newLane.toString());
+	newLane.step();
+	newLane.step();
+	newLane.step();
+	newLane.step();
+	newLane.step();
+	newLane.step();
+	newLane.step();
+	System.out.println("3: " + newLane.toString());
+	newLane.step();
+	System.out.println("4: " + newLane.toString());
+	newLane.step();
+	System.out.println("5: " + newLane.toString());
+	
+	Lane anotherLane = new Lane(1);
+	anotherLane.putLast(car1);
+	System.out.println("6: " + anotherLane.toString());
+	anotherLane.putLast(anotherLane.getFirst());
+	System.out.println("7: " + anotherLane.toString());
+	
     }
 }
