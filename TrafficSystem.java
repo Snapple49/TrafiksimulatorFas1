@@ -19,6 +19,8 @@ public class TrafficSystem {
     
     private int intensity;
     private int leftIntensity;
+    private int leftCounter;
+    
 
     // Diverse attribut för statistiksamling
       
@@ -60,13 +62,56 @@ public class TrafficSystem {
     public void step() {
 	// Stega systemet ett tidssteg m h a komponenternas step-metoder
 	// Skapa bilar, lägg in och ta ur på de olika Lane-kompenenterna
+    	
     	time++;
-    	r0.step();
+    	if(!(r0.posFree(0))){
+    		switch (r0.firstCar().getDest()) {
+    		case 1: 
+    			if(r1.lastFree()){
+    				r1.putLast(r0.getFirst());
+    				r0.step();
+    			}else{
+    				r0.step(false);
+    			}
+    			break;
+    			
+    		case 2:
+    			if(r2.lastFree()){
+    				r2.putLast(r0.getFirst());
+    				r0.step();
+    			}else{
+    				r0.step(false);
+    			}
+    			break;
+    			
+    		}
+    		
+    	}else{    		
+    		r0.step();
+    	}    	
     	r1.step();
     	r2.step();
     	s1.step();
-    	r2.step();
-    	
+    	s2.step();
+    	if(this.time == this.intensity){
+    		if(this.leftIntensity > 0){
+    			if(leftCounter % leftIntensity == 0){
+    				Car nextCar = new Car(this.time, 2);    				
+    				r0.putLast(nextCar);
+    			}else{
+    				Car nextCar = new Car(this.time, 1);    				    				
+    				r0.putLast(nextCar);
+    			}
+    		}else {
+    			if(leftCounter % leftIntensity == 0){
+    				Car nextCar = new Car(this.time, 1);    				
+    				r0.putLast(nextCar);
+    			}else{
+    				Car nextCar = new Car(this.time, 2);    				    				
+    				r0.putLast(nextCar);
+    			}
+    		}
+    	}
     	
     }
 

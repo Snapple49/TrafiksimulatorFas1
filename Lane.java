@@ -29,11 +29,7 @@ public class Lane {
     }
 	public void step(boolean green) {
 		if (green) {
-			this.getFirst();
-			for (int i = 1; i < theLane.length; i++) {
-				theLane[i-1] = theLane[i];
-			}
-			theLane[theLane.length-1] = null;
+			this.step();
 		}
 		else {
 			for (int j = 0; j <theLane.length; j++) {
