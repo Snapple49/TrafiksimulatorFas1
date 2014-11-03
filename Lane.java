@@ -27,6 +27,22 @@ public class Lane {
 		theLane[theLane.length-1] = null;
 		
     }
+	public void step(boolean green) {
+		if (green) {
+			this.getFirst();
+			for (int i = 1; i < theLane.length; i++) {
+				theLane[i-1] = theLane[i];
+			}
+			theLane[theLane.length-1] = null;
+		}
+		else {
+			for (int j = 0; j <theLane.length; j++) {
+				if (this.posFree(j)) {
+					this.theLane[j] = this.theLane[j+1];
+				}		
+			}	
+		}
+	}
     
     public Car getFirst() {
 	// Returnera och tag bort bilen som står först
@@ -39,6 +55,9 @@ public class Lane {
 	return theLane[0];
     }
 
+    public boolean posFree(int pos) {
+    	return (theLane[pos] == null);
+    }
 
     public boolean lastFree() {
 	// Returnera true om sista platsen ledig, annars false
