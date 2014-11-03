@@ -16,8 +16,12 @@ public class Light {
     }
 
     public void step() {
-	this.time++;
-       // Stegar fram klocka ett steg
+    	if(this.time < this.period - 1){
+    		this.time++;
+    	}else{
+    		this.time = 0;
+    	}
+    	// Stegar fram klocka ett steg
     }
 
     public boolean isGreen()   {

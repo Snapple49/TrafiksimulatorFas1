@@ -1,4 +1,6 @@
-import java.util.concurrent.TimeUnit;
+
+
+
 
 public class TrafficSystem {
     // Definierar de vägar och signaler som ingår i det 
@@ -14,6 +16,9 @@ public class TrafficSystem {
 
     // Diverse attribut för simuleringsparametrar (ankomstintensiteter,
     // destinationer...)
+    
+    private int intensity;
+    private int leftIntensity;
 
     // Diverse attribut för statistiksamling
       
@@ -39,10 +44,28 @@ public class TrafficSystem {
     	
     }
 
+    public TrafficSystem(int intensity, int leftIntensity, int period, int greenPeriodStraight, int greenPeriodTurn, int r0, int r1){
+    	this.r0 = new Lane(r0);
+    	this.r1 = new Lane(r1);
+    	this.r2 = new Lane(r1);
+    	this.s1 = new Light(period, greenPeriodStraight);
+    	this.s2 = new Light(period, greenPeriodTurn);
+    	this.intensity = intensity;
+    	this.leftIntensity = leftIntensity;
+
+    	
+    	
+    }
+    
     public void step() {
 	// Stega systemet ett tidssteg m h a komponenternas step-metoder
 	// Skapa bilar, lägg in och ta ur på de olika Lane-kompenenterna
-    	
+    	time++;
+    	r0.step();
+    	r1.step();
+    	r2.step();
+    	s1.step();
+    	r2.step();
     	
     	
     }
@@ -63,18 +86,6 @@ public class TrafficSystem {
     
     public static void main(String []args){
     	
-    	int loop = 0;
-    	while(loop<10){
-    		System.out.println("Hej!");
-    		
-			try {
-				TimeUnit.SECONDS.wait(1);
-			} catch (InterruptedException e) {
-				e.getMessage();
-			}
-			
-    		loop++;
-    	}
     }
 
 
