@@ -20,36 +20,38 @@ public class Simulation {
     		System.out.println("Must be between 0 and 11");
     		intensity = sc.nextInt();
     	}
+    	
     	System.out.println("Please enter leftIntensity: \n");
     	leftIntensity = sc.nextInt();
-    	while(0 > leftIntensity || leftIntensity > 10){
-    		System.out.println("Must be between 0 and 11");
-    		leftIntensity = sc.nextInt();
-    	}
+    	
     	System.out.println("Please enter period: \n");
     	period = sc.nextInt();
     	while(0 >= period){
     		System.out.println("Must be larger than 0");
     		period = sc.nextInt();
     	}
+    	
     	System.out.println("Please enter green period for straight: \n");
     	greenPeriodStraight = sc.nextInt();
     	while(0 >= greenPeriodStraight || greenPeriodStraight >= period){
     		System.out.println("Must be larger than 0 and smaller than period");
     		greenPeriodStraight = sc.nextInt();
     	}
+    	
     	System.out.println("Please enter green period for turning: \n");
     	greenPeriodTurn = sc.nextInt();
     	while(0 >= greenPeriodTurn || greenPeriodTurn >= period){
     		System.out.println("Must be larger than 0 and smaller than period");
     		greenPeriodTurn = sc.nextInt();
     	}
+    	
     	System.out.println("Please enter length of first part of lane: \n");
     	r0 = sc.nextInt();
     	while(0 >= r0){
     		System.out.println("Must be larger than 0");
     		r0= sc.nextInt();
     	}
+    	
     	System.out.println("Please enter length of second part of lane: \n");
     	r1 = sc.nextInt();
     	while(0 >= r1){
@@ -60,6 +62,7 @@ public class Simulation {
     	
     	TrafficSystem ts = new TrafficSystem(intensity, leftIntensity, period, greenPeriodStraight, greenPeriodTurn, r0, r1);
     	System.out.print(ts.toString());
+    	
     	ts.step();
     	System.out.print(ts.toString());
     	ts.step();
