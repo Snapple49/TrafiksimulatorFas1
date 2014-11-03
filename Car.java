@@ -2,7 +2,7 @@
 
 public class Car {
 	
-	private class BadDestination extends IndexOutOfBoundsException{
+	public class BadDestination extends IndexOutOfBoundsException{
 		public BadDestination(String errormsg){
 			System.err.println(errormsg);
 		}

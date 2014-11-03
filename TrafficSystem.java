@@ -19,7 +19,7 @@ public class TrafficSystem {
     
     private int intensity;
     private int leftIntensity;
-    private int leftCounter;
+    private int leftCounter = 0;
     
 
     // Diverse attribut för statistiksamling
@@ -93,7 +93,7 @@ public class TrafficSystem {
     	r2.step();
     	s1.step();
     	s2.step();
-    	if(this.time == this.intensity){
+    	if(this.time % this.intensity == 0){
     		if(this.leftIntensity > 0){
     			if(leftCounter % leftIntensity == 0){
     				Car nextCar = new Car(this.time, 2);    				
@@ -111,6 +111,7 @@ public class TrafficSystem {
     				r0.putLast(nextCar);
     			}
     		}
+    		leftCounter++;
     	}
     	
     }
