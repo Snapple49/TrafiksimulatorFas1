@@ -84,6 +84,46 @@ public class Simulation {
     	System.out.print(ts.toString());
     	
     	
+    	ts.step();
+    	System.out.print(ts.toString());
+    	
+    	
+    	ts.step();
+    	System.out.print(ts.toString());
+    	
+    	
+    	ts.step();
+    	System.out.print(ts.toString());
+    	
+    	
+    	ts.step();
+    	System.out.print(ts.toString());
+    	
+    	
+    	ts.step();
+    	System.out.print(ts.toString());
+    	
+    	
+    	ts.step();
+    	System.out.print(ts.toString());
+    	
+    	
+    	ts.step();
+    	System.out.print(ts.toString());
+    	
+    	
+    	ts.step();
+    	System.out.print(ts.toString());
+    	
+    	
+    	ts.step();
+    	System.out.print(ts.toString());
+    	
+    	
+    	ts.step();
+    	System.out.print(ts.toString());
+    	
+    	
 
     }
 }
