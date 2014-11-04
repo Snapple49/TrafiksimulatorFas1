@@ -28,11 +28,13 @@ public class TrafficSystem {
     private int time = 0;
 
     public TrafficSystem() { //Some form of standard values here
-    	r0 = new Lane(10);
-    	r1 = new Lane(4);
-    	r2 = new Lane(4);
+    	r0 = new Lane(20);
+    	r1 = new Lane(5);
+    	r2 = new Lane(5);
     	s1 = new Light(10, 3);
     	s2 = new Light(10, 5);
+    	intensity = 1;
+    	leftIntensity = 3;
     }
     
 
@@ -113,35 +115,7 @@ public class TrafficSystem {
     				r0.putLast(nextCar);
     			}
     		}
-    		
-    		/*	if(this.leftIntensity > 0){
-    			if(carCounter % leftIntensity == 0){
-    				int nextLeft = (int ) Math.random()*leftIntensity + 1;
-    				if(carCounter % nextLeft == 0){
-    					Car nextCar = new Car(this.time, 2);    				
-    					r0.putLast(nextCar);
-    				}
-    				
-    			}else{
-    				Car nextCar = new Car(this.time, 1);    				    				
-    				r0.putLast(nextCar);
-    			}
-    		}else {
-    			if(carCounter % leftIntensity == 0){
-    				Car nextCar = new Car(this.time, 1);    				
-    				r0.putLast(nextCar);
-    			}else{
-    				int nextLeft = (int ) Math.random()*leftIntensity + 1;
-    				if(carCounter % nextLeft == 0){
-    					Car nextCar = new Car(this.time, 2);    				    				
-    					r0.putLast(nextCar);
-    				}
-    			}
-    		}*/
-    	//carCounter++;
     	}
-    	
-    	
     }
 
     public void printStatistics() {

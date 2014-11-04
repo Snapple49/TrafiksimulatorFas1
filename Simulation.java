@@ -70,24 +70,54 @@ public static TrafficSystem enterValues() {
 
 public static void testSimulate(TrafficSystem ts) {
 	System.out.print(ts.toString());
-	
 	ts.step();
 	System.out.print(ts.toString());
 	ts.step();
 	System.out.print(ts.toString());
-	
 	ts.step();
 	System.out.print(ts.toString());
-	
 	ts.step();
 	System.out.print(ts.toString());
-	
 	ts.step();
 	System.out.print(ts.toString());
-	
 	ts.step();
 	System.out.print(ts.toString());
-	
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
+	ts.step();
+	System.out.print(ts.toString());
 	ts.step();
 	System.out.print(ts.toString());
 }
@@ -111,54 +141,18 @@ public static void testSimulate(TrafficSystem ts) {
     	
     	switch (choice) {
 		case 1:
-			TrafficSystem ts = enterValues();
-			testSimulate(ts);
+			TrafficSystem ts1 = enterValues();
+			testSimulate(ts1);
 			break;
 		case 2:
+			TrafficSystem ts2 = new TrafficSystem();
+			testSimulate(ts2);
 			break;
 		case 3:
 			break;
     	}
     	
-    	
-    	ts.step();
-    	System.out.print(ts.toString());
-    	
-    	
-    	ts.step();
-    	System.out.print(ts.toString());
-    	
-    	
-    	ts.step();
-    	System.out.print(ts.toString());
-    	
-    	
-    	ts.step();
-    	System.out.print(ts.toString());
-    	
-    	
-    	ts.step();
-    	System.out.print(ts.toString());
-    	
-    	
-    	ts.step();
-    	System.out.print(ts.toString());
-    	
-    	
-    	ts.step();
-    	System.out.print(ts.toString());
-    	
-    	
-    	ts.step();
-    	System.out.print(ts.toString());
-    	
-    	
-    	ts.step();
-    	System.out.print(ts.toString());
-    	
-    	
-    	ts.step();
-    	System.out.print(ts.toString());
+    
     	
     	
 
