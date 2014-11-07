@@ -61,6 +61,10 @@ public class TrafficSystem {
     	
     }
     
+    public int getTime(){
+    	return this.time;
+    }
+    
     public void step() {
 	// Stega systemet ett tidssteg m h a komponenternas step-metoder
 	// Skapa bilar, lägg in och ta ur på de olika Lane-kompenenterna
