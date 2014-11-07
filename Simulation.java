@@ -1,70 +1,133 @@
 import java.util.Scanner;
 public class Simulation {
 
+private	static int maxTime = 0;
+	
+private static void enterMaxTime() {
+	Scanner sc = new Scanner(System.in);
+	do{
+		try {
+
+			System.out.println("Please enter time for how long you want to simulate (in seconds) (must be larger than 0). \n");
+			maxTime = sc.nextInt();
+		}
+		catch (java.util.InputMismatchException e) {
+		System.out.println("Not a number!");
+		sc.nextLine();
+		maxTime = 0;
+		}
+	} while (maxTime <= 0);
+	sc.close();
+	
+}
+	
 public static TrafficSystem enterValues() {
 	int intensity = 0;
 	int leftIntensity = 0;
+	int leftIntensityNumerical = 0;
 	int period = 0;
 	int greenPeriodStraight = 0;
 	int greenPeriodTurn = 0;
 	int r0 = 0;
 	int r1 = 0;
-	int r2 = 0;
-	
 	
 	Scanner sc = new Scanner(System.in);
+
 	do{
 		try {
-			System.out.println("Please enter intensity: \n");
+
+			System.out.println("Please enter intensity (must be between 0 and 11). \n");
 			intensity = sc.nextInt();
 		}
 		catch (java.util.InputMismatchException e) {
-		}
+		System.out.println("Not a number!");
 		sc.nextLine();
-		System.out.println("Must be between 0 and 11");
 		intensity = 0;
-	} while (intensity < 0 || intensity > 10);
+		}
+	} while (intensity <= 0 || intensity > 10);
 
+	do{
+		try {
+			sc.nextLine();
+			System.out.println("Please enter leftIntensity.\n");
+			leftIntensity = sc.nextInt();
+			leftIntensityNumerical = 1;
+		}
+		catch (java.util.InputMismatchException e) {
+		System.out.println("Not a number!");
+		leftIntensity = 0;
+		leftIntensityNumerical = 0;
+		}
+	} while (leftIntensityNumerical == 0);
 	
-	System.out.println("Please enter leftIntensity: \n");
-	leftIntensity = sc.nextInt();
+	do{
+		try {
+
+			System.out.println("Please enter period (must be larger than 1). \n");
+			period = sc.nextInt();
+		}
+		catch (java.util.InputMismatchException e) {
+		System.out.println("Not a number!");
+		sc.nextLine();
+		period = 0;
+		}
+	} while (period <= 1);
 	
-	System.out.println("Please enter period: \n");
-	period = sc.nextInt();
-	while(0 >= period){
-		System.out.println("Must be larger than 0");
-		period = sc.nextInt();
-	}
+	do{
+		try {
+
+			System.out.println("Please enter green period for straight (must be larger than 0 and smaller than period). \n");
+			greenPeriodStraight = sc.nextInt();
+		}
+		catch (java.util.InputMismatchException e) {
+		System.out.println("Not a number!");
+		sc.nextLine();
+		greenPeriodStraight = 0;
+		}
+	} while (greenPeriodStraight <= 0 || greenPeriodStraight >= period);
 	
-	System.out.println("Please enter green period for straight: \n");
-	greenPeriodStraight = sc.nextInt();
-	while(0 >= greenPeriodStraight || greenPeriodStraight >= period){
-		System.out.println("Must be larger than 0 and smaller than period");
-		greenPeriodStraight = sc.nextInt();
-	}
+	do{
+		try {
+
+			System.out.println("Please enter green period for turning (must be larger than 0 and smaller than period). \n");
+			greenPeriodTurn = sc.nextInt();
+		}
+		catch (java.util.InputMismatchException e) {
+		System.out.println("Not a number!");
+		sc.nextLine();
+		greenPeriodTurn = 0;
+		}
+	} while (greenPeriodTurn <= 0 || greenPeriodTurn >= period);
 	
-	System.out.println("Please enter green period for turning: \n");
-	greenPeriodTurn = sc.nextInt();
-	while(0 >= greenPeriodTurn || greenPeriodTurn >= period){
-		System.out.println("Must be larger than 0 and smaller than period");
-		greenPeriodTurn = sc.nextInt();
-	}
+	do{
+		try {
+
+			System.out.println("Please enter length of first part of lane (must be larger than 0). \n");
+			r0 = sc.nextInt();
+		}
+		catch (java.util.InputMismatchException e) {
+		System.out.println("Not a number!");
+		sc.nextLine();
+		r0 = 0;
+		}
+	} while (r0 <= 0);
 	
-	System.out.println("Please enter length of first part of lane: \n");
-	r0 = sc.nextInt();
-	while(0 >= r0){
-		System.out.println("Must be larger than 0");
-		r0= sc.nextInt();
-	}
+	do{
+		try {
+
+			System.out.println("Please enter length of second part of lane (must be larger than 0). \n");
+			r1 = sc.nextInt();
+		}
+		catch (java.util.InputMismatchException e) {
+		System.out.println("Not a number!");
+		sc.nextLine();
+		r1 = 0;
+		}
+	} while (r1 <= 0);
 	
-	System.out.println("Please enter length of second part of lane: \n");
-	r1 = sc.nextInt();
-	while(0 >= r1){
-		System.out.println("Must be larger than 0");
-		r1 = sc.nextInt();
-	}
-	r2 = r1;
-	
+
+
+	sc.close();
 	return new TrafficSystem(intensity, leftIntensity, period, greenPeriodStraight, greenPeriodTurn, r0, r1);	
 }
 
@@ -112,6 +175,7 @@ public static void testSimulate(TrafficSystem ts) {
     	switch (choice) {
 		case 1:
 			TrafficSystem ts = enterValues();
+			enterMaxTime(); 
 			testSimulate(ts);
 			break;
 		case 2:
@@ -121,6 +185,8 @@ public static void testSimulate(TrafficSystem ts) {
     	}
     	
     	
-
+    	sc.close();	
     }
+    
+    
 }
