@@ -8,23 +8,24 @@ import java.util.Scanner;
 public class Simulation {
 
 
-private	static int maxTime = 0;
 	
-private static void enterMaxTime() {
+public static int enterMaxTime() {
 	Scanner sc = new Scanner(System.in);
+	int time;
 	do{
 		try {
-
+			
 			System.out.println("Please enter time for how long you want to simulate (in seconds) (must be larger than 0). \n");
-			maxTime = sc.nextInt();
+			time = sc.nextInt();
 		}
 		catch (java.util.InputMismatchException e) {
 		System.out.println("Not a number!");
 		sc.nextLine();
-		maxTime = 0;
+		time = 0;
 		}
-	} while (maxTime <= 0);
+	} while (time <= 0);
 	sc.close();
+	return time;
 	
 }
 	
@@ -34,55 +35,7 @@ private static void enterMaxTime() {
 public static void testSimulate(TrafficSystem ts) {
 		System.out.print(ts.toString());
 		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print(ts.toString());
+		System.out.print("-----------------------------------------------------------");
 	}
 
 
@@ -104,10 +57,12 @@ public static void testSimulate(TrafficSystem ts) {
     	
     	switch (choice) {
 		case 1:
-			TrafficSystem ts1 = enterValues();
-			testSimulate(ts1);
-			int time = 10;
-			while(ts1.getTime() < time)
+			TrafficSystem ts1 = new TrafficSystem();
+			ts1.readParameters(1);
+			int maxTime = enterMaxTime();
+			while(ts1.getTime() < maxTime) {
+				testSimulate(ts1);
+			}
 			break;
 		case 2:
 			TrafficSystem ts2 = new TrafficSystem();

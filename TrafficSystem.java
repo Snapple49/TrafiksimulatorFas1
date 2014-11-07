@@ -145,7 +145,6 @@ public void enterValues() {
 	
 
 
-	sc.close();
 	this.intensity = intensity;
 	this.leftIntensity = leftIntensity;
 	this.s1 = new Light(period, greenPeriodStraight);
@@ -168,7 +167,7 @@ public void enterValues() {
     		this.enterValues(); 
     		break;
     	case 2:
-    		this.getProperties();
+    		//this.getProperties();
     		break;
     	}
     }
