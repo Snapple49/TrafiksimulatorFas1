@@ -35,7 +35,7 @@ public static int enterMaxTime() {
 public static void testSimulate(TrafficSystem ts) {
 		System.out.print(ts.toString());
 		ts.step();
-		System.out.print("-----------------------------------------------------------");
+		System.out.print("\n-----------------------------------------------------------\n");
 	}
 
 
