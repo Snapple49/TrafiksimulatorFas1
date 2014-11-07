@@ -1,5 +1,12 @@
 import java.util.Scanner;
+/**Simulation program for gathering test data from a traffic situation. Enter data yourself, use standard data or read data for a file for your traffic system. 
+ * 
+ *  
+ * @author Oliver & Alex
+ *
+ */
 public class Simulation {
+
 
 private	static int maxTime = 0;
 	
@@ -131,29 +138,61 @@ public static TrafficSystem enterValues() {
 	return new TrafficSystem(intensity, leftIntensity, period, greenPeriodStraight, greenPeriodTurn, r0, r1);	
 }
 
+
+	
 public static void testSimulate(TrafficSystem ts) {
-	System.out.print(ts.toString());
-	
-	ts.step();
-	System.out.print(ts.toString());
-	ts.step();
-	System.out.print(ts.toString());
-	
-	ts.step();
-	System.out.print(ts.toString());
-	
-	ts.step();
-	System.out.print(ts.toString());
-	
-	ts.step();
-	System.out.print(ts.toString());
-	
-	ts.step();
-	System.out.print(ts.toString());
-	
-	ts.step();
-	System.out.print(ts.toString());
-}
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+		ts.step();
+		System.out.print(ts.toString());
+	}
 
 
     public static void main(String [] args) {
@@ -174,15 +213,20 @@ public static void testSimulate(TrafficSystem ts) {
     	
     	switch (choice) {
 		case 1:
-			TrafficSystem ts = enterValues();
-			enterMaxTime(); 
-			testSimulate(ts);
+			TrafficSystem ts1 = enterValues();
+			testSimulate(ts1);
+			int time = 10;
+			while(ts1.getTime() < time)
 			break;
 		case 2:
+			TrafficSystem ts2 = new TrafficSystem();
+			testSimulate(ts2);
 			break;
 		case 3:
 			break;
     	}
+    	
+    
     	
     	
     	sc.close();	

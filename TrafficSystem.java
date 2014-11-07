@@ -19,7 +19,7 @@ public class TrafficSystem {
     
     private int intensity;
     private int leftIntensity;
-    private int leftCounter = 0;
+    //private int carCounter = 0;
     
 
     // Diverse attribut för statistiksamling
@@ -28,11 +28,13 @@ public class TrafficSystem {
     private int time = 0;
 
     public TrafficSystem() { //Some form of standard values here
-    	r0 = new Lane(10);
-    	r1 = new Lane(4);
-    	r2 = new Lane(4);
+    	r0 = new Lane(20);
+    	r1 = new Lane(5);
+    	r2 = new Lane(5);
     	s1 = new Light(10, 3);
     	s2 = new Light(10, 5);
+    	intensity = 1;
+    	leftIntensity = 3;
     }
     
 
@@ -59,11 +61,19 @@ public class TrafficSystem {
     	
     }
     
+    public int getTime(){
+    	return this.time;
+    }
+    
     public void step() {
 	// Stega systemet ett tidssteg m h a komponenternas step-metoder
 	// Skapa bilar, lägg in och ta ur på de olika Lane-kompenenterna
     	
     	time++;
+    	s1.step();
+    	s2.step();
+    	r1.step();
+    	r2.step();
     	if(!(r0.posFree(0))){
     		switch (r0.firstCar().getDest()) {
     		case 1: 
@@ -89,21 +99,19 @@ public class TrafficSystem {
     	}else{    		
     		r0.step();
     	}    	
-    	r1.step();
-    	r2.step();
-    	s1.step();
-    	s2.step();
-    	if(this.time % this.intensity == 0){
-    		if(this.leftIntensity > 0){
-    			if(leftCounter % leftIntensity == 0){
+    	if(time % intensity == 0){
+    	
+    		int nextDest = (int ) (Math.random()*leftIntensity) + 1;
+    		if(leftIntensity > 0){
+    			if(nextDest % leftIntensity == 0){
     				Car nextCar = new Car(this.time, 2);    				
-    				r0.putLast(nextCar);
+					r0.putLast(nextCar);
     			}else{
     				Car nextCar = new Car(this.time, 1);    				    				
     				r0.putLast(nextCar);
     			}
-    		}else {
-    			if(leftCounter % leftIntensity == 0){
+    		}else{
+    			if(nextDest % leftIntensity == 0){
     				Car nextCar = new Car(this.time, 1);    				
     				r0.putLast(nextCar);
     			}else{
@@ -111,9 +119,7 @@ public class TrafficSystem {
     				r0.putLast(nextCar);
     			}
     		}
-    		leftCounter++;
     	}
-    	
     }
 
     public void printStatistics() {
