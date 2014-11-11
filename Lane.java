@@ -84,33 +84,5 @@ public class Lane {
 		return returnString;
     }
 
-    public static void main(String [] args) {
-	Lane newLane = new Lane(10);
-	System.out.println("1: " + newLane.toString());
-	Car car1 = new Car(5, 1);
-	newLane.putLast(car1);
-	newLane.step();
-	Car car2 = new Car(4, 2);
-	newLane.putLast(car2);
-	newLane.step();
-	newLane.step();
-	newLane.step();
-	newLane.step();
-	newLane.step();
-	newLane.step();
-	newLane.step();
-	newLane.step();
-	System.out.println("3: " + newLane.toString());
-	newLane.step();
-	System.out.println("4: " + newLane.toString());
-	newLane.step();
-	System.out.println("5: " + newLane.toString());
-	
-	Lane anotherLane = new Lane(1);
-	anotherLane.putLast(car1);
-	System.out.println("6: " + anotherLane.toString());
-	anotherLane.putLast(anotherLane.getFirst());
-	System.out.println("7: " + anotherLane.toString());
-	
-    }
+
 }

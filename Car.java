@@ -38,10 +38,4 @@ public class Car {
 	return "Car(bornTime=" + this.bornTime + ", dest=" + this.dest + ")";
     }
 
-    public static void main(String [] args) {
-	Car x = new Car(5, 2);
-	Car y = new Car(4, 1);
-	System.out.println(x.toString() + "\n" + y.toString() + "\n" + x.getBornTime() + "\n" + x.getDest());
-	
-    }
 }

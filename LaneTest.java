@@ -13,6 +13,51 @@ public class LaneTest {
 		tester.step();
 		assertTrue(tester.firstCar() == car1);
 	}
+	
+	@Test
+	public void testFalseStep() {
+		Lane tester = new Lane(3);
+		int testVar = 0;
+		Car car1 = new Car(1, 1);
+		Car car2 = new Car(1, 2);
+		Car car3 = new Car(1, 1);
+		tester.putLast(car1);
+		tester.step(false);
+		tester.putLast(car2);
+		tester.step(false);
+		tester.putLast(car3);
+		tester.step(false);
+		try {
+		tester.putLast(car3);
+		}
+		catch (Lane.OverflowException e) {
+			testVar = 1;
+		}
+		assertTrue(testVar == 1);		
+	}
+	@Test
+	public void testTrueStep() {
+		Lane tester = new Lane(3);
+		int testVar = 0;
+		Car car1 = new Car(1, 1);
+		Car car2 = new Car(1, 2);
+		Car car3 = new Car(1, 1);
+		tester.putLast(car1);
+		tester.step(false);
+		tester.putLast(car2);
+		tester.step(false);
+		tester.putLast(car3);
+		tester.step(false);
+		tester.step(true);
+		try {
+			tester.putLast(car3);
+			}
+			catch (Lane.OverflowException e) {
+				testVar = 1;
+			}
+		
+		assertTrue(testVar == 0);
+	}
 
 	@Test
 	public void testGetFirst() {
@@ -30,10 +75,8 @@ public class LaneTest {
 	
 	@Test
 	public void testLastFree() {
-		Lane tester10 = new Lane(10);
-		
-		
-		
+		Lane tester = new Lane(10);
+		assertTrue(tester.lastFree());
 		
 	}
 	
