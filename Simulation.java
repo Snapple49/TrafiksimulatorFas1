@@ -74,7 +74,7 @@ public static void testSimulate(TrafficSystem ts) {
 			}
 			break;
 		case 3:
-			ts = TrafficSystem.readParameters(2);;
+			ts = TrafficSystem.readParameters(2);
 			while(ts.getTime() < maxTime) {
 				testSimulate(ts);
 				ts.printStatistics();

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.Properties;
 
+
 public class TrafficSystem {
 
     // Definierar de vägar och signaler som ingår i det 
@@ -255,25 +256,29 @@ public class TrafficSystem {
     		longLane.step();
     	}    	
     	if(time % intensity == 0){
-    	
-    		int nextDest = (int ) (Math.random()*leftIntensity) + 1;
-    		if(leftIntensity > 0){
-    			if(nextDest % leftIntensity == 0){
-    				Car nextCar = new Car(this.time, 2);    				
-					longLane.putLast(nextCar);
-    			}else{
-    				Car nextCar = new Car(this.time, 1);    				    				
-    				longLane.putLast(nextCar);
-    			}
-    		}else{
-    			if(nextDest % leftIntensity == 0){
-    				Car nextCar = new Car(this.time, 1);    				
-    				longLane.putLast(nextCar);
-    			}else{
-    				Car nextCar = new Car(this.time, 2);    				    				
-    				longLane.putLast(nextCar);
-    			}
-    		}
+	    	try{
+	    		int nextDest = (int ) (Math.random()*leftIntensity) + 1;
+	    		if(leftIntensity > 0){
+	    			if(nextDest % leftIntensity == 0){
+	    				Car nextCar = new Car(this.time, 2);    				
+						longLane.putLast(nextCar);
+	    			}else{
+	    				Car nextCar = new Car(this.time, 1);    				    				
+	    				longLane.putLast(nextCar);
+	    			}
+	    		}else{
+	    			if(nextDest % leftIntensity == 0){
+	    				Car nextCar = new Car(this.time, 1);    				
+	    				longLane.putLast(nextCar);
+	    			}else{
+	    				Car nextCar = new Car(this.time, 2);    				    				
+	    				longLane.putLast(nextCar);
+	    			}
+	    		}
+	    	}
+	    	catch (Lane.OverflowException e){
+	    		throw new RuntimeException("Long lane overloaded, cars cannot enter");
+	    	}
     	}
     	if (statCar1 != null) {
     		this.getStat(statCar1);
