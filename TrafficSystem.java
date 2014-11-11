@@ -21,8 +21,8 @@ public class TrafficSystem {
     private int leftIntensity;
     //private int carCounter = 0;
     
-    private int totalCars;
-    private int totalTime;
+    private float totalCars;
+    private float totalTime;
     private int maxTime;
     
 
@@ -287,10 +287,7 @@ public class TrafficSystem {
     
     public void getStat(Car car) {
     	int carTime = this.time - car.getBornTime();
-    	if (this.totalTime == 0) { 
-    		this.totalTime = carTime;
-    				}
-    	this.totalTime = (carTime + this.totalTime)/2;
+    	this.totalTime += carTime;
     	if (this.maxTime < carTime) {
     		this.maxTime = carTime;
     	}
@@ -303,7 +300,7 @@ public class TrafficSystem {
     		System.out.println("No cars have left the system.");
     	}
     	else {
-    	System.out.println("Average time: " + this.totalTime / this.totalCars);
+    	System.out.println("Average time: " + (this.totalTime / this.totalCars));
     	System.out.println("Max time: " + this.maxTime);
     	}
     }

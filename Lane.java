@@ -20,7 +20,7 @@ public class Lane {
 	// Stega fram alla fordon (utom det på plats 0) ett steg 
         // (om det gar). (Fordonet på plats 0 tas bort utifrån 
 	// mm h a metoden nedan.)
-    	this.getFirst();
+    	//this.getFirst();
     	for (int i = 1; i < theLane.length; i++) {
     		theLane[i-1] = theLane[i]; 
     	}
@@ -32,9 +32,10 @@ public class Lane {
 			this.step();
 		}
 		else {
-			for (int j = 0; j < this.theLane.length - 1; j++) {
+			for (int j = 0; j < this.theLane.length-1; j++) {
 				if (this.posFree(j)) {
 					this.theLane[j] = this.theLane[j+1];
+					this.theLane[j+1] = null;
 				}		
 			}	
 		}
