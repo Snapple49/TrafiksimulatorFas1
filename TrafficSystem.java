@@ -1,4 +1,3 @@
-import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.Properties;
 
@@ -11,11 +10,11 @@ public class TrafficSystem {
 	// Samlar statistik
 
 	// Attribut som beskriver beståndsdelarna i systemet
-	private Lane  r0;
-	private Lane  r1;
-	private Lane  r2;
-	private Light s1;
-	private Light s2;
+	private Lane  longLane;
+	private Lane  straightLane;
+	private Lane  leftLane;
+	private Light straightLight;
+	private Light leftLight;
 
 	// Diverse attribut för simuleringsparametrar (ankomstintensiteter,
 	// destinationer...)
@@ -31,11 +30,11 @@ public class TrafficSystem {
 	private int time = 0;
 
 	public TrafficSystem() { //Some form of standard values here
-		r0 = new Lane(20);
-		r1 = new Lane(5);
-		r2 = new Lane(5);
-		s1 = new Light(10, 3);
-		s2 = new Light(10, 5);
+		longLane = new Lane(20);
+		straightLane = new Lane(5);
+		leftLane = new Lane(5);
+		straightLight = new Light(10, 3);
+		leftLight = new Light(10, 5);
 		intensity = 1;
 		leftIntensity = 3;
 	}
@@ -148,11 +147,11 @@ public class TrafficSystem {
 
 		this.intensity = intensity;
 		this.leftIntensity = leftIntensity;
-		this.s1 = new Light(period, greenPeriodStraight);
-		this.s2 = new Light(period, greenPeriodTurn);
-		this.r0 = new Lane(r0);
-		this.r1 = new Lane(r1);
-		this.r2 = new Lane(r1);
+		this.straightLight = new Light(period, greenPeriodStraight);
+		this.leftLight = new Light(period, greenPeriodTurn);
+		this.longLane = new Lane(r0);
+		this.straightLane = new Lane(r1);
+		this.leftLane = new Lane(r1);
 
 	}
 
@@ -163,33 +162,37 @@ public class TrafficSystem {
 		// är att föredra vid uttestning av programmet eftersom
 		// man inte då behöver mata in värdena vid varje körning.
 		// Standardklassen Properties är användbar för detta. 
-		//switch (input) {
-		/*case 1:
-			this.enterValues(); 
-			break;
-			*/
-		//case 2:
-			GetPropertyValues something = new GetPropertyValues();
-			Properties p = something.getPropValues();
-			int i1 = Integer.parseInt(something.getPropValues().getProperty("intensity"));
-			int i2 = Integer.parseInt(something.getPropValues().getProperty("leftIntensity"));
-			int i3 = Integer.parseInt(something.getPropValues().getProperty("period"));
-			int i4 = Integer.parseInt(something.getPropValues().getProperty("greenPeriodStraight"));
-			int i5 = Integer.parseInt(something.getPropValues().getProperty("greenPeriodTurn"));
-			int i6 = Integer.parseInt(something.getPropValues().getProperty("firstLane"));
-			int i7 = Integer.parseInt(something.getPropValues().getProperty("secondLane"));
+		switch (input) {
+		case 1:
+			TrafficSystem ts = new  TrafficSystem();
+			ts.enterValues();
+			return ts;
+			
+		case 2:
+			GetPropertyValues property = new GetPropertyValues();
+			Properties p = property.getPropValues();
+			int i1 = Integer.parseInt(property.getPropValues().getProperty("intensity"));
+			int i2 = Integer.parseInt(property.getPropValues().getProperty("leftIntensity"));
+			int i3 = Integer.parseInt(property.getPropValues().getProperty("period"));
+			int i4 = Integer.parseInt(property.getPropValues().getProperty("greenPeriodStraight"));
+			int i5 = Integer.parseInt(property.getPropValues().getProperty("greenPeriodTurn"));
+			int i6 = Integer.parseInt(property.getPropValues().getProperty("firstLane"));
+			int i7 = Integer.parseInt(property.getPropValues().getProperty("secondLane"));
 
 			return new TrafficSystem(i1, i2, i3, i4 ,i5 ,i6 ,i7);
 			
-		//}
+		
+		default:
+			return new TrafficSystem();
+		}
 	}
-
+	
 	public TrafficSystem(int intensity, int leftIntensity, int period, int greenPeriodStraight, int greenPeriodTurn, int r0, int r1){
-		this.r0 = new Lane(r0);
-		this.r1 = new Lane(r1);
-		this.r2 = new Lane(r1);
-		this.s1 = new Light(period, greenPeriodStraight);
-		this.s2 = new Light(period, greenPeriodTurn);
+		this.longLane = new Lane(r0);
+		this.straightLane = new Lane(r1);
+		this.leftLane = new Lane(r1);
+		this.straightLight = new Light(period, greenPeriodStraight);
+		this.leftLight = new Light(period, greenPeriodTurn);
 		this.intensity = intensity;
 		this.leftIntensity = leftIntensity;
 
@@ -206,34 +209,34 @@ public class TrafficSystem {
 		// Skapa bilar, lägg in och ta ur på de olika Lane-kompenenterna
 
 		time++;
-		s1.step();
-		s2.step();
-		r1.step();
-		r2.step();
-		if(!(r0.posFree(0))){
-			switch (r0.firstCar().getDest()) {
+		straightLight.step();
+		leftLight.step();
+		straightLane.step();
+		leftLane.step();
+		if(!(longLane.posFree(0))){
+			switch (longLane.firstCar().getDest()) {
 			case 1: 
-				if(r1.lastFree()){
-					r1.putLast(r0.getFirst());
-					r0.step();
+				if(straightLane.lastFree()){
+					straightLane.putLast(longLane.getFirst());
+					longLane.step();
 				}else{
-					r0.step(false);
+					longLane.step(false);
 				}
 				break;
 
 			case 2:
-				if(r2.lastFree()){
-					r2.putLast(r0.getFirst());
-					r0.step();
+				if(leftLane.lastFree()){
+					leftLane.putLast(longLane.getFirst());
+					longLane.step();
 				}else{
-					r0.step(false);
+					longLane.step(false);
 				}
 				break;
 
 			}
 
 		}else{    		
-			r0.step();
+			longLane.step();
 		}    	
 		if(time % intensity == 0){
 
@@ -241,18 +244,18 @@ public class TrafficSystem {
 			if(leftIntensity > 0){
 				if(nextDest % leftIntensity == 0){
 					Car nextCar = new Car(this.time, 2);    				
-					r0.putLast(nextCar);
+					longLane.putLast(nextCar);
 				}else{
 					Car nextCar = new Car(this.time, 1);    				    				
-					r0.putLast(nextCar);
+					longLane.putLast(nextCar);
 				}
 			}else{
 				if(nextDest % leftIntensity == 0){
 					Car nextCar = new Car(this.time, 1);    				
-					r0.putLast(nextCar);
+					longLane.putLast(nextCar);
 				}else{
 					Car nextCar = new Car(this.time, 2);    				    				
-					r0.putLast(nextCar);
+					longLane.putLast(nextCar);
 				}
 			}
 		}
@@ -268,7 +271,7 @@ public class TrafficSystem {
 	}
 
 	public String toString() { //mal = polymorfism
-		return "r0 = " + this.r0.toString() + "\nr1= " + this.r1.toString() + "\nr2= " + this.r2.toString() + "\ns1= " + this.s1.toString() + "\ns2= " + this.s2.toString() + ")";
+		return "r0 = " + this.longLane.toString() + "\nr1= " + this.straightLane.toString() + "\nr2= " + this.leftLane.toString() + "\ns1= " + this.straightLight.toString() + "\ns2= " + this.leftLight.toString() + ")";
 	}
 
 

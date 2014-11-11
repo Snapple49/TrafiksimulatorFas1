@@ -55,31 +55,28 @@ public static void testSimulate(TrafficSystem ts) {
     		sc.nextLine();
     	} while (choice <= 0 || choice > 3);
     	
-    	TrafficSystem ts = new TrafficSystem();
+    	TrafficSystem ts;
     	int maxTime = enterMaxTime();
     	switch (choice) {
 		case 1:
-			ts.readParameters(1);
+			ts = TrafficSystem.readParameters(1);
 			while(ts.getTime() < maxTime) {
 				testSimulate(ts);
 			}
 			break;
 		case 2:
-			TrafficSystem ts1 = TrafficSystem.readParameters(2);
-			while(ts1.getTime() < maxTime) {
-				testSimulate(ts1);
+			ts = new TrafficSystem();			
+			while(ts.getTime() < maxTime) {
+				testSimulate(ts);
 			}
 			break;
 		case 3:
-			ts.readParameters(2);;
+			ts = TrafficSystem.readParameters(2);;
 			while(ts.getTime() < maxTime) {
 				testSimulate(ts);
 			}
 			break;
     	}
-    	
-    
-    	
     	
     	sc.close();	
     }
