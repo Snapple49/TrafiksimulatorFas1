@@ -168,6 +168,11 @@ public static void testSimulate(TrafficSystem ts) {
     	int maxTime = enterMaxTime();
     	switch (choice) {
 		case 1:
+			ts = TrafficSystem.readParameters(1);;
+			while(ts.getTime() < maxTime) {
+				testSimulate(ts);
+				ts.printStatistics();
+			}
 			break;
 
 		case 2:

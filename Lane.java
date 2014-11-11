@@ -32,7 +32,7 @@ public class Lane {
 			this.step();
 		}
 		else {
-			for (int j = 0; j <theLane.length; j++) {
+			for (int j = 0; j < this.theLane.length - 1; j++) {
 				if (this.posFree(j)) {
 					this.theLane[j] = this.theLane[j+1];
 				}		

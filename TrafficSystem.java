@@ -298,8 +298,14 @@ public class TrafficSystem {
     }
     
     public void printStatistics() {
+    	System.out.println("Statistics:");
+    	if (this.totalCars == 0) {
+    		System.out.println("No cars have left the system.");
+    	}
+    	else {
     	System.out.println("Average time: " + this.totalTime / this.totalCars);
     	System.out.println("Max time: " + this.maxTime);
+    	}
     }
 
     public void print() {
