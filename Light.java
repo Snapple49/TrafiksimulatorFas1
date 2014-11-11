@@ -20,7 +20,7 @@ public class Light {
     		this.time++;
     	}else{
     		this.time = 0;
-    	}
+    	}	
     	// Stegar fram klocka ett steg
     }
 

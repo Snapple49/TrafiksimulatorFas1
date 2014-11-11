@@ -144,7 +144,7 @@ public static int enterMaxTime() {
 public static void testSimulate(TrafficSystem ts) {
 		System.out.print(ts.toString());
 		ts.step();
-		System.out.print("\n-----------------------------------------------------------\n");
+		System.out.print("\n-----------------------" + ts.getTime() + "-----------------------\n");
 	}
 
 
@@ -164,25 +164,27 @@ public static void testSimulate(TrafficSystem ts) {
     		sc.nextLine();
     	} while (choice <= 0 || choice > 3);
     	
+    	TrafficSystem ts;
+    	int maxTime = enterMaxTime();
     	switch (choice) {
 		case 1:
-			TrafficSystem ts1 = enterValues();
-			int maxTime = enterMaxTime();
-			while(ts1.getTime() < maxTime) {
-				testSimulate(ts1);
-				ts1.printStatistics();
+			break;
+
+		case 2:
+			ts = new TrafficSystem();			
+			while(ts.getTime() < maxTime) {
+				testSimulate(ts);
+				ts.printStatistics();
 			}
 			break;
-		case 2:
-			TrafficSystem ts2 = new TrafficSystem();
-			testSimulate(ts2);
-			break;
 		case 3:
+			ts = TrafficSystem.readParameters(2);;
+			while(ts.getTime() < maxTime) {
+				testSimulate(ts);
+				ts.printStatistics();
+			}
 			break;
     	}
-    	
-    
-    	
     	
     	sc.close();	
     }
