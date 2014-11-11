@@ -34,15 +34,4 @@ public class Light {
     public String toString() {
 	return "Light(period=" + this.period + ", time=" + this.time + ", green=" + this.green + ")";
     }
-
-    public static void main(String [] args) {
-	Light x = new Light(5, 5);
-	Light y = new Light(1, 1);
-	System.out.println(x.toString() + "\n" + y.toString() + "\n" + y.isGreen());
-	y.step();
-	System.out.println(y.isGreen());
-	
-    }
-	
-
 }
