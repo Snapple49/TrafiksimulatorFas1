@@ -1,16 +1,14 @@
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lane.
+ * The Class Lane provides Car array objects of specified length with methods for moving the cars in, to or from the object.  
  */
 public class Lane {
 
     /**
-     * The Class OverflowException.
+     * The Class OverflowException extends RuntimeException (@see java.lang.Object#toString()) and is used when trying to add a Car into an already full Lane. 
      */
     public static class OverflowException extends RuntimeException {
-        // Undantag som kastas nar det inte gick att lagga 
-        // in en ny bil pa vagen
     	/**
          * Instantiates a new overflow exception.
          *
@@ -25,22 +23,18 @@ public class Lane {
     private Car[] theLane;
 
     /**
-     * Instantiates a new lane.
+     * Instantiates a new lane of length length.
      *
-     * @param n the n
+     * @param length the length of the Lane. 
      */
-    public Lane(int n) {
-    	// Konstruerar ett Lane-objekt med plats for n fordon
-    	this.theLane = new Car[n];
+    public Lane(int length) {
+    	this.theLane = new Car[length];
     }
 
     /**
-     * Step.
+     * Step moves, if possible, all Cars in Lane one step forward (except the Car at position 0). If there is a car at position 0, it is removed.  
      */
     public void step() {
-	// Stega fram alla fordon (utom det på plats 0) ett steg 
-        // (om det gar). (Fordonet på plats 0 tas bort utifrån 
-	// mm h a metoden nedan.)
     	this.getFirst();
     	for (int i = 1; i < theLane.length; i++) {
     		theLane[i-1] = theLane[i]; 
@@ -50,9 +44,9 @@ public class Lane {
     }
 	
 	/**
-	 * Step.
+	 * Step behaves like the instance of step without parameters if isGreen is true. If isGreen is false, it does not remove the Car at position 0 (if there is one) and moves Cars forward where there is space. 
 	 *
-	 * @param isGreen the green
+	 * @param isGreen is a boolean. If true, the light is green. 
 	 */
 	public void step(boolean isGreen) {
 		if (isGreen) {
@@ -68,52 +62,53 @@ public class Lane {
 		}
 	}
    
+
+	/**
+	 * Gets the first Car in Lane and removes it from Lane. 
+	 *
+	 * @return the first Car in Lane
+	 */
 	public Car getFirst() {
-	// Returnera och tag bort bilen som står först
     	Car temp = this.theLane[0];
     	this.theLane[0] = null;
     	return temp;
     }
     
     /**
-     * First car.
+     * Gets the first Car without removing it. 
      *
-     * @return the car
+     * @return the first Car in Lane.
      */
     public Car firstCar() {
-	// Returnera bilen som står först utan att ta bort den
 	return theLane[0];
     }
 
     /**
-     * Pos free.
+     * Checks whether the given position is free or not. 
      *
-     * @param pos the pos
-     * @return true, if successful
+     * @param pos the position.
+     * @return true, if pos is free, else false. 
      */
     public boolean posFree(int pos) {
     	return (theLane[pos] == null);
     }
 
     /**
-     * Last free.
+     * Last free checks whether the last position of Lane is empty.
      *
-     * @return true, if successful
+     * @return true, if the last position is free, else false. 
      */
     public boolean lastFree() {
-	// Returnera true om sista platsen ledig, annars false
 	return (theLane[theLane.length - 1] == null);
     }
 
     /**
-     * Put last.
+     * Put a Car in the last place of Lane (if possible).  
      *
-     * @param c the c
-     * @throws OverflowException the overflow exception
+     * @param c the Car.
+     * @throws OverflowException the overflow exception is used when the last position of Lane is not empty. 
      */
     public void putLast(Car c) throws OverflowException {
-	// Stall en bil pa sista platsen pa vagen
-	// (om det gar).    	
     	if (theLane[theLane.length - 1] == null) {
     		theLane[theLane.length - 1] = c;
     	}else 
