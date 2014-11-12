@@ -6,7 +6,7 @@
 public class Lane {
 
     /**
-     * The Class OverflowException extends RuntimeException (@see java.lang.Object#toString()) and is used when trying to add a Car into an already full Lane. 
+     * The Class OverflowException extends RuntimeException (@see java.lang.RuntimeException()) and is used when trying to add a Car into an already full Lane. 
      */
     public static class OverflowException extends RuntimeException {
     	/**
