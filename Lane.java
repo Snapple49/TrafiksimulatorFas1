@@ -41,7 +41,7 @@ public class Lane {
 	// Stega fram alla fordon (utom det på plats 0) ett steg 
         // (om det gar). (Fordonet på plats 0 tas bort utifrån 
 	// mm h a metoden nedan.)
-    	//this.getFirst();
+    	this.getFirst();
     	for (int i = 1; i < theLane.length; i++) {
     		theLane[i-1] = theLane[i]; 
     	}
@@ -52,10 +52,10 @@ public class Lane {
 	/**
 	 * Step.
 	 *
-	 * @param green the green
+	 * @param isGreen the green
 	 */
-	public void step(boolean green) {
-		if (green) {
+	public void step(boolean isGreen) {
+		if (isGreen) {
 			this.step();
 		}
 		else {

@@ -7,11 +7,17 @@ public class LaneTest {
 	
 	@Test
 	public void testStep() {
-		Lane tester = new Lane(2);
+		Lane tester = new Lane(5);
 		Car car1 = new Car(1, 1);
 		tester.putLast(car1);
-		tester.step();
+		for(int i = 0; i < 4; i++){
+			tester.step();
+		}
 		assertTrue(tester.firstCar() == car1);
+		Lane tester2 = new Lane(1);
+		tester2.putLast(car1);
+		tester2.step();
+		assertTrue(tester2.firstCar() == null);
 	}
 	
 	@Test
