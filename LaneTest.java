@@ -49,11 +49,11 @@ public class LaneTest {
 		Car car2 = new Car(1, 2);
 		Car car3 = new Car(1, 1);
 		tester.putLast(car1);
-		tester.step(false);
+		tester.step();
 		tester.putLast(car2);
-		tester.step(false);
+		tester.step();
 		tester.putLast(car3);
-		tester.step(false);
+		tester.step();
 		tester.step(true);
 		try {
 			tester.putLast(car3);
@@ -85,14 +85,6 @@ public class LaneTest {
 		assertTrue(tester.lastFree());
 		
 	}
-	
-	@Test
-	public void test4() {
-		Lane tester = new Lane(2);
-		Car car1 = new Car(1, 1);
-		tester.putLast(car1);
-		tester.step();
-		assertTrue(tester.getFirst() == car1);
-	}
+	 //* skriv test för toString
 
 }

@@ -1,46 +1,53 @@
 import java.util.Scanner;
 import java.util.Properties;
+import java.util.InputMismatchException;
 
 
 public class TrafficSystem {
+	
+	public static class BadFileDataException extends IllegalArgumentException{
+		public BadFileDataException(String errormsg){
+			System.err.println(errormsg);
+		}
+	}
 
-    // Definierar de vägar och signaler som ingår i det 
-    // system som skall studeras.
-    // Samlar statistik
-    
-    // Attribut som beskriver beståndsdelarna i systemet
-    private Lane  longLane;
-    private Lane  straightLane;
-    private Lane  leftLane;
-    private Light straightLight;
-    private Light leftLight;
+	// Definierar de vägar och signaler som ingår i det 
+	// system som skall studeras.
+	// Samlar statistik
 
-    // Diverse attribut för simuleringsparametrar (ankomstintensiteter,
-    // destinationer...)
-    
-    private int intensity;
-    private int leftIntensity;
-    //private int carCounter = 0;
-    
-    private float totalCars;
-    private float totalTime;
-    private int maxTime;
-    
+	// Attribut som beskriver beståndsdelarna i systemet
+	private Lane  longLane;
+	private Lane  straightLane;
+	private Lane  leftLane;
+	private Light straightLight;
+	private Light leftLight;
 
-    // Diverse attribut för statistiksamling
-      
-    
-    private int time = 0;
+	// Diverse attribut för simuleringsparametrar (ankomstintensiteter,
+	// destinationer...)
 
-    public TrafficSystem() { //Some form of standard values here
-    	longLane = new Lane(20);
-    	straightLane = new Lane(5);
-    	leftLane = new Lane(5);
-    	straightLight = new Light(10, 3);
-    	leftLight = new Light(10, 5);
-    	intensity = 1;
-    	leftIntensity = 3;
-    }
+	private int intensity;
+	private int leftIntensity;
+	//private int carCounter = 0;
+
+	private float totalCars;
+	private float totalTime;
+	private int maxTime;
+
+
+	// Diverse attribut för statistiksamling
+
+
+	private int time = 0;
+
+	public TrafficSystem() { //Some form of standard values here
+		longLane = new Lane(20);
+		straightLane = new Lane(5);
+		leftLane = new Lane(5);
+		straightLight = new Light(10, 3);
+		leftLight = new Light(10, 5);
+		intensity = 1;
+		leftIntensity = 3;
+	}
 
 
 	public void enterValues() {
@@ -61,7 +68,7 @@ public class TrafficSystem {
 				System.out.println("Please enter intensity (must be between 0 and 11). \n");
 				intensity = sc.nextInt();
 			}
-			catch (java.util.InputMismatchException e) {
+			catch (InputMismatchException e) {
 				System.out.println("Not a number!");
 				sc.nextLine();
 				intensity = 0;
@@ -75,7 +82,7 @@ public class TrafficSystem {
 				leftIntensity = sc.nextInt();
 				leftIntensityNumerical = 1;
 			}
-			catch (java.util.InputMismatchException e) {
+			catch (InputMismatchException e) {
 				System.out.println("Not a number!");
 				leftIntensity = 0;
 				leftIntensityNumerical = 0;
@@ -88,7 +95,7 @@ public class TrafficSystem {
 				System.out.println("Please enter period (must be larger than 1). \n");
 				period = sc.nextInt();
 			}
-			catch (java.util.InputMismatchException e) {
+			catch (InputMismatchException e) {
 				System.out.println("Not a number!");
 				sc.nextLine();
 				period = 0;
@@ -101,7 +108,7 @@ public class TrafficSystem {
 				System.out.println("Please enter green period for straight (must be larger than 0 and smaller than period). \n");
 				greenPeriodStraight = sc.nextInt();
 			}
-			catch (java.util.InputMismatchException e) {
+			catch (InputMismatchException e) {
 				System.out.println("Not a number!");
 				sc.nextLine();
 				greenPeriodStraight = 0;
@@ -114,7 +121,7 @@ public class TrafficSystem {
 				System.out.println("Please enter green period for turning (must be larger than 0 and smaller than period). \n");
 				greenPeriodTurn = sc.nextInt();
 			}
-			catch (java.util.InputMismatchException e) {
+			catch (InputMismatchException e) {
 				System.out.println("Not a number!");
 				sc.nextLine();
 				greenPeriodTurn = 0;
@@ -127,7 +134,7 @@ public class TrafficSystem {
 				System.out.println("Please enter length of first part of lane (must be larger than 0). \n");
 				r0 = sc.nextInt();
 			}
-			catch (java.util.InputMismatchException e) {
+			catch (InputMismatchException e) {
 				System.out.println("Not a number!");
 				sc.nextLine();
 				r0 = 0;
@@ -140,7 +147,7 @@ public class TrafficSystem {
 				System.out.println("Please enter length of second part of lane (must be larger than 0). \n");
 				r1 = sc.nextInt();
 			}
-			catch (java.util.InputMismatchException e) {
+			catch (InputMismatchException e) {
 				System.out.println("Not a number!");
 				sc.nextLine();
 				r1 = 0;
@@ -158,8 +165,8 @@ public class TrafficSystem {
 		this.leftLane = new Lane(r1);
 
 	}
-    
-    public static TrafficSystem readParameters(int input) {
+
+	public static TrafficSystem readParameters(int input) {
 		// Läser in parametrar för simuleringen
 		// Metoden kan läsa från terminalfönster, dialogrutor
 		// eller från en parameterfil. Det sista alternativet
@@ -171,157 +178,162 @@ public class TrafficSystem {
 			TrafficSystem ts = new  TrafficSystem();
 			ts.enterValues();
 			return ts;
-			
+
 		case 2:
 			GetPropertyValues property = new GetPropertyValues();
 			Properties p = property.getPropValues();
-			int i1 = Integer.parseInt(property.getPropValues().getProperty("intensity"));
-			int i2 = Integer.parseInt(property.getPropValues().getProperty("leftIntensity"));
-			int i3 = Integer.parseInt(property.getPropValues().getProperty("period"));
-			int i4 = Integer.parseInt(property.getPropValues().getProperty("greenPeriodStraight"));
-			int i5 = Integer.parseInt(property.getPropValues().getProperty("greenPeriodTurn"));
-			int i6 = Integer.parseInt(property.getPropValues().getProperty("firstLane"));
-			int i7 = Integer.parseInt(property.getPropValues().getProperty("secondLane"));
-
-			return new TrafficSystem(i1, i2, i3, i4 ,i5 ,i6 ,i7);
 			
-		
+			int i1, i2, i3, i4 , i5, i6, i7;
+			
+			try {
+				i1 = Integer.parseInt(property.getPropValues().getProperty("intensity"));
+				i2 = Integer.parseInt(property.getPropValues().getProperty("leftIntensity"));
+				i3 = Integer.parseInt(property.getPropValues().getProperty("period"));
+				i4 = Integer.parseInt(property.getPropValues().getProperty("greenPeriodStraight"));
+				i5 = Integer.parseInt(property.getPropValues().getProperty("greenPeriodTurn"));
+				i6 = Integer.parseInt(property.getPropValues().getProperty("firstLane"));
+				i7 = Integer.parseInt(property.getPropValues().getProperty("secondLane"));
+				return new TrafficSystem(i1, i2, i3, i4 ,i5 ,i6 ,i7);
+			} catch (NumberFormatException e) {
+				throw new BadFileDataException("File contains invalid data! All parameters must be integers, see config.properties or README.md");
+			}
+
 		default:
 			return new TrafficSystem();
 		}
 	}
 
-    public TrafficSystem(int intensity, int leftIntensity, int period, int greenPeriodStraight, int greenPeriodTurn, int r0, int r1){
-    	this.longLane = new Lane(r0);
-    	this.straightLane = new Lane(r1);
-    	this.leftLane = new Lane(r1);
-    	this.straightLight = new Light(period, greenPeriodStraight);
-    	this.leftLight = new Light(period, greenPeriodTurn);
-    	this.intensity = intensity;
-    	this.leftIntensity = leftIntensity;
+	public TrafficSystem(int intensity, int leftIntensity, int period, int greenPeriodStraight, int greenPeriodTurn, int r0, int r1){
+		this.longLane = new Lane(r0);
+		this.straightLane = new Lane(r1);
+		this.leftLane = new Lane(r1);
+		this.straightLight = new Light(period, greenPeriodStraight);
+		this.leftLight = new Light(period, greenPeriodTurn);
+		this.intensity = intensity;
+		this.leftIntensity = leftIntensity;
 
-    	
-    	
-    }
-    
-    public int getTime(){
-    	return this.time;
-    }
-    
-    public void step() {
-	// Stega systemet ett tidssteg m h a komponenternas step-metoder
-	// Skapa bilar, lägg in och ta ur på de olika Lane-kompenenterna
-    	Car statCar1 = null;
-    	Car statCar2 = null;
-    	
-    	time++;
-    	straightLight.step();
-    	leftLight.step();
-    	boolean green1 = straightLight.isGreen();
-    	boolean green2 = leftLight.isGreen();
-    	
-    	if (green1) {
-    		statCar1 = straightLane.getFirst();
-    	}
-    	straightLane.step(green1);
-    	
-    	if (green2) {
-    		statCar2 = leftLane.getFirst();
-    	}
-    	leftLane.step(green2);
-    	
-    	if(!(longLane.posFree(0))){
-    		switch (longLane.firstCar().getDest()) {
-    		case 1: 
-    			if(straightLane.lastFree()){
-    				straightLane.putLast(longLane.getFirst());
-    				longLane.step();
-    			}else{
-    				longLane.step(false);
-    			}
-    			break;
-    			
-    		case 2:
-    			if(leftLane.lastFree()){
-    				leftLane.putLast(longLane.getFirst());
-    				longLane.step();
-    			}else{
-    				longLane.step(false);
-    			}
-    			break;
-    			
-    		}
-    		
-    	}else{    		
-    		longLane.step();
-    	}    	
-    	if(time % intensity == 0){
-	    	try{
-	    		int nextDest = (int ) (Math.random()*leftIntensity) + 1;
-	    		if(leftIntensity > 0){
-	    			if(nextDest % leftIntensity == 0){
-	    				Car nextCar = new Car(this.time, 2);    				
+
+
+	}
+
+	public int getTime(){
+		return this.time;
+	}
+
+	public void step() {
+		// Stega systemet ett tidssteg m h a komponenternas step-metoder
+		// Skapa bilar, lägg in och ta ur på de olika Lane-kompenenterna
+		Car statCar1 = null;
+		Car statCar2 = null;
+
+		time++;
+		straightLight.step();
+		leftLight.step();
+		boolean green1 = straightLight.isGreen();
+		boolean green2 = leftLight.isGreen();
+
+		if (green1) {
+			statCar1 = straightLane.getFirst();
+		}
+		straightLane.step(green1);
+
+		if (green2) {
+			statCar2 = leftLane.getFirst();
+		}
+		leftLane.step(green2);
+
+		if(!(longLane.posFree(0))){
+			switch (longLane.firstCar().getDest()) {
+			case 1: 
+				if(straightLane.lastFree()){
+					straightLane.putLast(longLane.getFirst());
+					longLane.step();
+				}else{
+					longLane.step(false);
+				}
+				break;
+
+			case 2:
+				if(leftLane.lastFree()){
+					leftLane.putLast(longLane.getFirst());
+					longLane.step();
+				}else{
+					longLane.step(false);
+				}
+				break;
+
+			}
+
+		}else{    		
+			longLane.step();
+		}    	
+		if(time % intensity == 0){
+			try{
+				int nextDest = (int ) (Math.random()*leftIntensity) + 1;
+				if(leftIntensity > 0){
+					if(nextDest % leftIntensity == 0){
+						Car nextCar = new Car(this.time, 2);    				
 						longLane.putLast(nextCar);
-	    			}else{
-	    				Car nextCar = new Car(this.time, 1);    				    				
-	    				longLane.putLast(nextCar);
-	    			}
-	    		}else{
-	    			if(nextDest % leftIntensity == 0){
-	    				Car nextCar = new Car(this.time, 1);    				
-	    				longLane.putLast(nextCar);
-	    			}else{
-	    				Car nextCar = new Car(this.time, 2);    				    				
-	    				longLane.putLast(nextCar);
-	    			}
-	    		}
-	    	}
-	    	catch (Lane.OverflowException e){
-	    		throw new RuntimeException("Long lane overloaded, cars cannot enter");
-	    	}
-    	}
-    	if (statCar1 != null) {
-    		this.getStat(statCar1);
-    		this.totalCars++;
-    	}
-    	if (statCar2 != null) {
-    		this.getStat(statCar2);
-    		this.totalCars++;
-        	}
-    }
-    
-    public void getStat(Car car) {
-    	int carTime = this.time - car.getBornTime();
-    	this.totalTime += carTime;
-    	if (this.maxTime < carTime) {
-    		this.maxTime = carTime;
-    	}
-    	
-    }
-    
-    public void printStatistics() {
-    	System.out.println("Statistics:");
-    	if (this.totalCars == 0) {
-    		System.out.println("No cars have left the system.");
-    	}
-    	else {
-    	System.out.println("Average time: " + (this.totalTime / this.totalCars));
-    	System.out.println("Max time: " + this.maxTime);
-    	}
-    }
+					}else{
+						Car nextCar = new Car(this.time, 1);    				    				
+						longLane.putLast(nextCar);
+					}
+				}else{
+					if(nextDest % leftIntensity == 0){
+						Car nextCar = new Car(this.time, 1);    				
+						longLane.putLast(nextCar);
+					}else{
+						Car nextCar = new Car(this.time, 2);    				    				
+						longLane.putLast(nextCar);
+					}
+				}
+			}
+			catch (Lane.OverflowException e){
+				throw new RuntimeException("Long lane overloaded, cars cannot enter");
+			}
+		}
+		if (statCar1 != null) {
+			this.getStat(statCar1);
+			this.totalCars++;
+		}
+		if (statCar2 != null) {
+			this.getStat(statCar2);
+			this.totalCars++;
+		}
+	}
 
-    public void print() {
-	// Skriv ut en grafisk representation av kösituationen
-	// med hjälp av klassernas toString-metoder
-    }
+	public void getStat(Car car) {
+		int carTime = this.time - car.getBornTime();
+		this.totalTime += carTime;
+		if (this.maxTime < carTime) {
+			this.maxTime = carTime;
+		}
 
-    public String toString() { //mal = polymorfism
-	return "r0 = " + this.longLane.toString() + "\nr1= " + this.straightLane.toString() + "\nr2= " + this.leftLane.toString() + "\ns1= " + this.straightLight.toString() + "\ns2= " + this.leftLight.toString() + ")";
-}
-    
-    
-    public static void main(String []args){
-    	
-    }
-    
+	}
+
+	public void printStatistics() {
+		System.out.println("Statistics:");
+		if (this.totalCars == 0) {
+			System.out.println("No cars have left the system.");
+		}
+		else {
+			System.out.println("Average time: " + (this.totalTime / this.totalCars));
+			System.out.println("Max time: " + this.maxTime);
+		}
+	}
+
+	public void print() {
+		// Skriv ut en grafisk representation av kösituationen
+		// med hjälp av klassernas toString-metoder
+	}
+
+	public String toString() { //mal = polymorfism
+		return "r0 = " + this.longLane.toString() + "\nr1= " + this.straightLane.toString() + "\nr2= " + this.leftLane.toString() + "\ns1= " + this.straightLight.toString() + "\ns2= " + this.leftLight.toString() + ")";
+	}
+
+
+	public static void main(String []args){
+
+	}
+
 }

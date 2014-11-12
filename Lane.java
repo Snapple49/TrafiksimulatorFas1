@@ -1,7 +1,7 @@
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lane provides Car array objects of specified length with methods for moving the cars in, to or from the object.  
+ * Lane provides Car array objects of specified length and methods for moving the cars in, to or from the object.  
  */
 public class Lane {
 
