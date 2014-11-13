@@ -13,7 +13,7 @@ public class Light {
 	private int time;  // Intern klocka: 0, 1, ... period-1, 0, 1 ...
 
 	/** The threshold for when traffic signal is green. */
-	private int greenThreshold; // Signalen grön när time<green 
+	private int greenThreshold; // Signalen grï¿½n nï¿½r time<green 
 
 	/**
 	 * Instantiates a new Light with specified period and green threshold.
@@ -21,7 +21,7 @@ public class Light {
 	 * @param period specify the period
 	 * @param greenThreshold specify the greenThreshold
 	 */
-	public Light(int period, int greenThreshold) {
+	public Light(int period, int greenThreshold) { //Todo: exception fÃ¶r invalid greenThreshold
 		this.period = period;
 		this.greenThreshold = greenThreshold;
 	}

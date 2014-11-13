@@ -1,5 +1,5 @@
 /**
- * Lane provides Car array objects of specified length and methods for moving the cars in, to or from the object.  
+ * Lane represents a lane in the Traffic System. The lane consists of an array of Cars of specified length. The class provides methods for moving the cars in, to or from the object.  
  */
 public class Lane {
 

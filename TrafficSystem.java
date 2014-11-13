@@ -23,12 +23,13 @@ public class TrafficSystem {
 	private int leftIntensity;
 	//private int carCounter = 0;
 
-	private float totalCars;
+	private int totalCarsIn;
+	private float totalCarsOut;
 	private float totalTime;
 	private int maxTime;
 
 
-	//Lägg till statistik om antal bilar in och ut (in = intensity?)
+	//Lï¿½gg till statistik om antal bilar in och ut (in = intensity?)
 	// Diverse attribut fÃ¶r statistiksamling
 
 
@@ -247,6 +248,7 @@ public class TrafficSystem {
 			longLane.step();
 		}    	
 		if(time % intensity == 0){
+			totalCarsIn++;
 			try{
 				int nextDest = (int ) (Math.random()*leftIntensity) + 1;
 				if(leftIntensity > 0){
@@ -275,16 +277,16 @@ public class TrafficSystem {
 			}
 		}
 		if (statCar1 != null) {
-			this.getStat(statCar1);
-			this.totalCars++;
+			this.writeStatistics(statCar1);
+			this.totalCarsOut++;
 		}
 		if (statCar2 != null) {
-			this.getStat(statCar2);
-			this.totalCars++;
+			this.writeStatistics(statCar2);
+			this.totalCarsOut++;
 		}
 	}
 
-	public void getStat(Car car) {
+	public void writeStatistics(Car car) {
 		int carTime = this.time - car.getBornTime();
 		this.totalTime += carTime;
 		if (this.maxTime < carTime) {
@@ -292,15 +294,26 @@ public class TrafficSystem {
 		}
 
 	}
+	
+	public Number[] getStatistics() { 
+		Number[] stats = {0, 0, 0, 0};
+		stats[0] = this.totalCarsIn;
+		stats[1] = (int) this.totalCarsOut;
+		stats[2] = this.maxTime;
+		stats[3] = this.totalTime;
+		return stats;
+	}
 
 	public void printStatistics() {
 		System.out.println("Statistics:");
-		if (this.totalCars == 0) {
+		if (this.totalCarsOut == 0) {
 			System.out.println("No cars have left the system.");
 		}
 		else {
-			System.out.println("Average time: " + (this.totalTime / this.totalCars));
+			System.out.println("Average time: " + (this.totalTime / this.totalCarsOut));
 			System.out.println("Max time: " + this.maxTime);
+			System.out.println("Number of Cars that have been inserted in the system: " + this.totalCarsIn);
+			System.out.println("Number of Cars that have left the system: " + (int) this.totalCarsOut);
 		}
 	}
 
