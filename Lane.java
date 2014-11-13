@@ -1,5 +1,3 @@
-
-// TODO: Auto-generated Javadoc
 /**
  * Lane provides Car array objects of specified length and methods for moving the cars in, to or from the object.  
  */
@@ -8,7 +6,7 @@ public class Lane {
     /**
      * The Class OverflowException extends RuntimeException (@see java.lang.RuntimeException()) and is used when trying to add a Car into an already full Lane. 
      */
-    public static class OverflowException extends RuntimeException {
+	protected class OverflowException extends RuntimeException {
     	/**
          * Instantiates a new overflow exception.
          *

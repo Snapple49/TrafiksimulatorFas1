@@ -32,7 +32,7 @@ public static int enterMaxTime() {
 
 
 	
-public static void testSimulate(TrafficSystem ts) {
+public static void simulate(TrafficSystem ts) {
 		System.out.print(ts.toString());
 		ts.step();
 		System.out.print("\n-----------------------" + ts.getTime() + "-----------------------\n");
@@ -61,7 +61,7 @@ public static void testSimulate(TrafficSystem ts) {
 		case 1:
 			ts = TrafficSystem.readParameters(1);;
 			while(ts.getTime() < maxTime) {
-				testSimulate(ts);
+				simulate(ts);
 				ts.printStatistics();
 			}
 			break;
@@ -69,14 +69,14 @@ public static void testSimulate(TrafficSystem ts) {
 		case 2:
 			ts = new TrafficSystem();			
 			while(ts.getTime() < maxTime) {
-				testSimulate(ts);
+				simulate(ts);
 				ts.printStatistics();
 			}
 			break;
 		case 3:
 			ts = TrafficSystem.readParameters(2);
 			while(ts.getTime() < maxTime) {
-				testSimulate(ts);
+				simulate(ts);
 				ts.printStatistics();
 			}
 			break;

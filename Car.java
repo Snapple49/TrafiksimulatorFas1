@@ -9,7 +9,7 @@ public class Car {
 	/**
 	 * The Class BadDestination extends extends IndexOutOfBoundsException (@see java.lang.IndexOutOfBoundsException()) and is used when trying to create a Car with a non-legitimate destination. 
 	 */
-	public class BadDestination extends IndexOutOfBoundsException{
+	protected class BadDestination extends IndexOutOfBoundsException{
 		
 		/**
 		 * Instantiates a new bad destination.
