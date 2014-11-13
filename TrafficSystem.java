@@ -2,38 +2,51 @@ import java.util.Scanner;
 import java.util.Properties;
 import java.util.InputMismatchException;
 
-
+/**
+ * The Class TrafficSystem represents the actual traffic system with all components. It contains methods for stepping the whole system forward in time, different ways of creating a TrafficSystem object and gathering and printing statistics for a simulation of the system.
+ */
 public class TrafficSystem {
 
-	// Definierar de vägar och signaler som ingår i det 
-	// system som skall studeras.
-	// Samlar statistik
 
-	// Attribut som beskriver beståndsdelarna i systemet
+	/** The long lane. */
 	private Lane  longLane;
+
+	/** The straight lane. */
 	private Lane  straightLane;
+
+	/** The left lane. */
 	private Lane  leftLane;
+
+	/** The straight light. */
 	private Light straightLight;
+
+	/** The left light. */
 	private Light leftLight;
 
-	// Diverse attribut för simuleringsparametrar (ankomstintensiteter,
-	// destinationer...)
-
+	/** The intensity. New car should arrive when time % intensity = 0 */
 	private int intensity;
-	private int leftIntensity;
-	//private int carCounter = 0;
 
+	/** The left intensity is the statistical chance of a car having the destination left. Negative leftIntensity is the reciprocal, so every n:th car goes straight instead with negative leftIntensity*/
+	private int leftIntensity;
+
+	
+	// Statistical data
+	/** The total cars. */
 	private float totalCars;
+
+	/** The total time. */
 	private float totalTime;
+
+	/** The max time. */
 	private int maxTime;
 
 
-	//L�gg till statistik om antal bilar in och ut (in = intensity?)
-	// Diverse attribut för statistiksamling
-
-
+	/** The time. */
 	private int time = 0;
 
+	/**
+	 * Instantiates a new traffic system with preset values.
+	 */
 	public TrafficSystem() { 
 		longLane = new Lane(20);
 		straightLane = new Lane(5);
@@ -44,6 +57,11 @@ public class TrafficSystem {
 		leftIntensity = 0;
 	}
 
+	/**
+	 * Instantiates a new traffic system with values from an integer array.
+	 *
+	 * @param arr the integer array with values for TrafficSystem 
+	 */
 	public TrafficSystem(int[] arr) {
 		intensity = arr[0];
 		leftIntensity = arr[1];
@@ -54,6 +72,9 @@ public class TrafficSystem {
 		leftLane = new Lane(arr[6]);
 	}
 
+	/**
+	 * Enter values
+	 */
 	public void enterValues() {
 		int intensity = 0;
 		int leftIntensity = 0;
@@ -170,6 +191,12 @@ public class TrafficSystem {
 
 	}
 
+	/**
+	 * Read parameters.
+	 *
+	 * @param input the input
+	 * @return the traffic system
+	 */
 	public static TrafficSystem readParameters(int input) {
 		// Läser in parametrar för simuleringen
 		// Metoden kan läsa från terminalfönster, dialogrutor
@@ -195,10 +222,18 @@ public class TrafficSystem {
 	}
 
 
+	/**
+	 * Gets the time.
+	 *
+	 * @return the time
+	 */
 	public int getTime(){
 		return this.time;
 	}
 
+	/**
+	 * Step.
+	 */
 	public void step() {
 		// Stega systemet ett tidssteg m h a komponenternas step-metoder
 		// Skapa bilar, lägg in och ta ur på de olika Lane-kompenenterna
@@ -284,6 +319,12 @@ public class TrafficSystem {
 		}
 	}
 
+	/**
+	 * Gets the stat.
+	 *
+	 * @param car the car
+	 * @return the stat
+	 */
 	public void getStat(Car car) {
 		int carTime = this.time - car.getBornTime();
 		this.totalTime += carTime;
@@ -293,6 +334,9 @@ public class TrafficSystem {
 
 	}
 
+	/**
+	 * Prints the statistics.
+	 */
 	public void printStatistics() {
 		System.out.println("Statistics:");
 		if (this.totalCars == 0) {
@@ -304,16 +348,27 @@ public class TrafficSystem {
 		}
 	}
 
+	/**
+	 * Prints the.
+	 */
 	public void print() {
 		// Skriv ut en grafisk representation av kösituationen
 		// med hjälp av klassernas toString-metoder
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() { //mal = polymorfism
 		return "r0 = " + this.longLane.toString() + "\nr1= " + this.straightLane.toString() + "\nr2= " + this.leftLane.toString() + "\ns1= " + this.straightLight.toString() + "\ns2= " + this.leftLight.toString() + ")";
 	}
 
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String []args){
 
 	}
