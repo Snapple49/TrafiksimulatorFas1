@@ -6,14 +6,14 @@
  */
 public class Light {
 
-	public class greenThresholdException extends Exception{		
+	public class greenThresholdException extends IndexOutOfBoundsException{		
 		private greenThresholdException(String message) {
 			super(message);
 		}
 		
 	}
 
-	private class periodException extends RuntimeException{
+	private class periodException extends IndexOutOfBoundsException{
 		private periodException(String message) {
 			super(message);
 		}
@@ -35,10 +35,10 @@ public class Light {
 	 * @param greenThreshold specify the greenThreshold
 	 * @throws greenThresholdException 
 	 */
-	public Light(int period, int greenThreshold) /*throws greenThresholdException */{ 
-		/*if (greenThreshold < 0) {
-			throw new greenThresholdException("greenThreshold must be bigger than 0.");
-		}*/
+	public Light(int period, int greenThreshold) { 
+		if (greenThreshold < 0) {
+			throw new periodException("greenThreshold must be bigger than 0.");
+		}
 		if (period < 0) {
 			throw new periodException("period must be bigger than 0.");
 		}
