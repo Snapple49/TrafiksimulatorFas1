@@ -2,8 +2,12 @@ import java.util.Scanner;
 import java.util.Properties;
 import java.util.InputMismatchException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class TrafficSystem represents the actual traffic system with all components. It contains methods for stepping the whole system forward in time, different ways of creating a TrafficSystem object and gathering and printing statistics for a simulation of the system.
+ * 
+ * @author Oliver Stein & Alexander Lind
+ * 
  */
 public class TrafficSystem {
 
@@ -29,7 +33,10 @@ public class TrafficSystem {
 	/** The left intensity is the statistical chance of a car having the destination left. Negative leftIntensity is the reciprocal, so every n:th car goes straight instead with negative leftIntensity*/
 	private int leftIntensity;
 
+	/** The total cars in. */
 	private int totalCarsIn;
+	
+	/** The total cars out. */
 	private float totalCarsOut;
 
 	/** The total time. */
@@ -43,7 +50,7 @@ public class TrafficSystem {
 	private int time = 0;
 
 	/**
-	 * Instantiates a new traffic system with preset values.
+	 * Instantiates a new traffic system with preset default values.
 	 */
 	public TrafficSystem() { 
 		longLane = new Lane(20);
@@ -71,7 +78,7 @@ public class TrafficSystem {
 	}
 
 	/**
-	 * Enter values
+	 * Reads parameters for a simulation from standard input stream, and sets the TrafficSystem object's values to these parameters.
 	 */
 	public void enterValues() {
 		int intensity = 0;
@@ -177,8 +184,6 @@ public class TrafficSystem {
 			}
 		} while (shortLane <= 0);
 
-
-
 		this.intensity = intensity;
 		this.leftIntensity = leftIntensity;
 		this.straightLight = new Light(period, greenPeriodStraight);
@@ -190,18 +195,13 @@ public class TrafficSystem {
 	}
 
 	/**
-	 * Read parameters.
+	 * Creates a new TrafficSystem object. Depending on the input, the values of the object are determined either with enterValues method or reading the config.properties file with getPropValues method, or just with the constructor default values.
 	 *
-	 * @param input the input
-	 * @return the traffic system
+	 * @param input the input determines how to construct the TrafficSystem: 1 for entering values, 2 for reading from file, otherwise default constructor.
+	 * @return TrafficSystem object created by using specified method.
 	 */
 	public static TrafficSystem readParameters(int input) {
-		// Läser in parametrar för simuleringen
-		// Metoden kan läsa från terminalfönster, dialogrutor
-		// eller från en parameterfil. Det sista alternativet
-		// är att föredra vid uttestning av programmet eftersom
-		// man inte då behöver mata in värdena vid varje körning.
-		// Standardklassen Properties är användbar för detta. 
+
 		switch (input) {
 		case 1:
 			TrafficSystem ts = new  TrafficSystem();
@@ -318,6 +318,11 @@ public class TrafficSystem {
 		}
 	}
 
+	/**
+	 * Write statistics.
+	 *
+	 * @param car the car
+	 */
 	public void writeStatistics(Car car) {
 
 		int carTime = this.time - car.getBornTime();
@@ -327,6 +332,11 @@ public class TrafficSystem {
 		}
 	}
 	
+	/**
+	 * Gets the statistics.
+	 *
+	 * @return the statistics
+	 */
 	public Number[] getStatistics() { 
 		Number[] stats = {0, 0, 0, 0};
 		stats[0] = this.totalCarsIn;
