@@ -12,9 +12,9 @@ public class Simulation {
 
 	
 /**
- * Enter max time.
+ * Request the user to enter max time, and if something that is not an int is entered, the user will have to try again.  
  *
- * @return the int
+ * @return the max time entered by the user. 
  */
 public static int enterMaxTime() {
 	Scanner sc = new Scanner(System.in);
@@ -39,19 +39,19 @@ public static int enterMaxTime() {
 
 	
 /**
- * Simulate.
+ * Simulates the system. It prints out the current statistics before stepping the system one step. 
  *
- * @param ts the ts
+ * @param system the traffic system. 
  */
-public static void simulate(TrafficSystem ts) {
-		System.out.print(ts.toString());
-		ts.step();
-		System.out.print("\n-----------------------" + ts.getTime() + "-----------------------\n");
+public static void simulate(TrafficSystem system) {
+		System.out.print(system.toString());
+		system.step();
+		System.out.print("\n-----------------------" + system.getTime() + "-----------------------\n");
 	}
 
 
     /**
-     * The main method.
+     * The main method. Asks the user for which method (1 = Enter them yourself, 2 = Default values, 3 = Read them from a file) of entering the values and starts the simulation. 
      *
      * @param args the arguments
      */

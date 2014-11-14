@@ -28,5 +28,6 @@ H19
 Q47
 
 Eventuella utökningar:
+* Graphics. 
 * Support for busses that takes as much space as two cars.
 * The possibility to switch between that intensity is precise and that intensity represents the likelihood of a car entering the system.   
