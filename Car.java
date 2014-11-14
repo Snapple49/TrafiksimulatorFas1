@@ -2,7 +2,7 @@
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Car provides two ints, one with the time when the car was born and another with the destination for the Car.
+ * The Class Car represents the cars in the Traffic System. It provides two attributes, and both of them are ints. One represents the time when the Car was born and the other represents the destination for the Car. The class also provides methods for getting the born time and the destination. 
  */
 public class Car {
 	
