@@ -56,8 +56,6 @@ public static void simulate(TrafficSystem ts) {
      * @param args the arguments
      */
     public static void main(String [] args) {
-	// Skapar ett TrafficSystem
-	// Utför stegningen, anropar utskriftsmetoder
     	Scanner sc = new Scanner(System.in);
     	int choice = 0;
     	
@@ -71,33 +69,12 @@ public static void simulate(TrafficSystem ts) {
     		sc.nextLine();
     	} while (choice <= 0 || choice > 3);
     	
-    	TrafficSystem ts;
     	int maxTime = enterMaxTime();
-    	switch (choice) {
-		case 1:
-			ts = TrafficSystem.readParameters(1);;
-			while(ts.getTime() < maxTime) {
-				simulate(ts);
-				ts.printStatistics();
-			}
-			break;
-
-		case 2:
-			ts = new TrafficSystem();			
-			while(ts.getTime() < maxTime) {
-				simulate(ts);
-				ts.printStatistics();
-			}
-			break;
-		case 3:
-			ts = TrafficSystem.readParameters(2);
-			while(ts.getTime() < maxTime) {
-				simulate(ts);
-				ts.printStatistics();
-			}
-			break;
-    	}
-    	
+    	TrafficSystem ts = TrafficSystem.readParameters(choice);
+    	while(ts.getTime() < maxTime) {
+			simulate(ts);
+			ts.printStatistics();
+		}
     	sc.close();	
     }
     

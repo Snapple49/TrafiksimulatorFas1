@@ -208,7 +208,7 @@ public class TrafficSystem {
 			ts.enterValues();
 			return ts;
 
-		case 2:
+		case 3:
 			GetPropertyValues property = new GetPropertyValues();
 			int[] propArray = property.getPropValues();
 			return new TrafficSystem(propArray);
