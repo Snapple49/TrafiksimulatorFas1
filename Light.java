@@ -6,6 +6,19 @@
  */
 public class Light {
 
+	public class greenThresholdException extends Exception{		
+		private greenThresholdException(String message) {
+			super(message);
+		}
+		
+	}
+
+	private class periodException extends RuntimeException{
+		private periodException(String message) {
+			super(message);
+		}
+	}
+
 	/** The period of the traffic system, determines length of internal timecycle. */
 	private int period;
 
@@ -20,10 +33,19 @@ public class Light {
 	 *
 	 * @param period specify the period
 	 * @param greenThreshold specify the greenThreshold
+	 * @throws greenThresholdException 
 	 */
-	public Light(int period, int greenThreshold) { //Todo: exception för invalid greenThreshold
+	public Light(int period, int greenThreshold) /*throws greenThresholdException */{ 
+		/*if (greenThreshold < 0) {
+			throw new greenThresholdException("greenThreshold must be bigger than 0.");
+		}*/
+		if (period < 0) {
+			throw new periodException("period must be bigger than 0.");
+		}
+		else {
 		this.period = period;
 		this.greenThreshold = greenThreshold;
+		}
 	}
 
 
