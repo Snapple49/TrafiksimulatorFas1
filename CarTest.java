@@ -12,14 +12,14 @@ public class CarTest {
 	public void testGetBornTime() {
 		Car tester = new Car(5,1);
 		assertEquals(5, tester.getBornTime());
-		fail("Borntime not correct.");
+		
 	}
 		
 	@Test
 	public void testGetDest() {
 		Car tester = new Car(5,1);
 		assertEquals(1, tester.getDest());
-		fail("Destination not correct.");
+		
 	}
 	
 	@Test
