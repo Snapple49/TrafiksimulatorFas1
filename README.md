@@ -27,6 +27,8 @@ G16
 H19
 Q47
 
+
 Possible additions to implement in future:
+* Graphics. 
 * Support for busses that takes as much space as two cars.
 * The possibility to switch between precise intensity and intensity representing the likelihood of a car entering the system.   
