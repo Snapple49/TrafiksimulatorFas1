@@ -1,4 +1,5 @@
 import java.util.Scanner;
+// TODO: Auto-generated Javadoc
 /**Simulation program for gathering test data from a traffic situation. Enter data yourself, use standard data or read data for a file for your traffic system. 
  * 
  *  
@@ -10,6 +11,11 @@ import java.util.Scanner;
 public class Simulation {
 
 	
+/**
+ * Enter max time.
+ *
+ * @return the int
+ */
 public static int enterMaxTime() {
 	Scanner sc = new Scanner(System.in);
 	int time;
@@ -32,6 +38,11 @@ public static int enterMaxTime() {
 
 
 	
+/**
+ * Simulate.
+ *
+ * @param ts the ts
+ */
 public static void simulate(TrafficSystem ts) {
 		System.out.print(ts.toString());
 		ts.step();
@@ -39,9 +50,12 @@ public static void simulate(TrafficSystem ts) {
 	}
 
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String [] args) {
-	// Skapar ett TrafficSystem
-	// Utför stegningen, anropar utskriftsmetoder
     	Scanner sc = new Scanner(System.in);
     	int choice = 0;
     	
@@ -55,33 +69,12 @@ public static void simulate(TrafficSystem ts) {
     		sc.nextLine();
     	} while (choice <= 0 || choice > 3);
     	
-    	TrafficSystem ts;
     	int maxTime = enterMaxTime();
-    	switch (choice) {
-		case 1:
-			ts = TrafficSystem.readParameters(1);;
-			while(ts.getTime() < maxTime) {
-				simulate(ts);
-				ts.printStatistics();
-			}
-			break;
-
-		case 2:
-			ts = new TrafficSystem();			
-			while(ts.getTime() < maxTime) {
-				simulate(ts);
-				ts.printStatistics();
-			}
-			break;
-		case 3:
-			ts = TrafficSystem.readParameters(2);
-			while(ts.getTime() < maxTime) {
-				simulate(ts);
-				ts.printStatistics();
-			}
-			break;
-    	}
-    	
+    	TrafficSystem ts = TrafficSystem.readParameters(choice);
+    	while(ts.getTime() < maxTime) {
+			simulate(ts);
+			ts.printStatistics();
+		}
     	sc.close();	
     }
     

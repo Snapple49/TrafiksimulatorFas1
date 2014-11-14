@@ -4,6 +4,10 @@
  * @author Oliver Stein & Alexander Lind
  * 
  */
+/*
+ * 
+ * Hej
+ */
 public class Light {
 
 	public class greenThresholdException extends IndexOutOfBoundsException{		
