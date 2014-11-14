@@ -1,10 +1,12 @@
 COMPILER = javac
 FLAGS = -g
 
+run: build
+	java Simulation
 
-run: Lane.class Light.class TrafficSystem.class Simulation.class Car.class
-	
-	
+build: Lane.class Light.class TrafficSystem.class Simulation.class Car.class
+
+
 Car.class: Car.java
 	$(COMPILER) $(FLAGS) Car.java
 
@@ -23,5 +25,4 @@ Light.class: Light.java
 clean:
 	$(RM) *.class
 
-.PHONY clean
-	
+.PHONY: clean

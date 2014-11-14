@@ -39,7 +39,7 @@ public class CarTest {
 		catch (Car.BadDestination e) {
 			testVar = 1;
 		}
-		assertTrue(testVar == 1);
+		assertTrue(testVar == 1); //assertThrows
 	}
 
 }
