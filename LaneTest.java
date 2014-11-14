@@ -18,6 +18,7 @@ public class LaneTest {
 		tester2.putLast(car1);
 		tester2.step();
 		assertTrue(tester2.firstCar() == null);
+		fail("Step without boolean variable not working correctly.");
 	}
 	
 	@Test
@@ -40,6 +41,7 @@ public class LaneTest {
 			testVar = 1;
 		}
 		assertTrue(testVar == 1);		
+		fail("Step with boolean variable false not working correctly.");
 	}
 	@Test
 	public void testTrueStep() {
@@ -63,6 +65,7 @@ public class LaneTest {
 			}
 		
 		assertTrue(testVar == 0);
+		fail("Step with boolean variable false not working correctly.");
 	}
 
 	@Test
@@ -77,12 +80,14 @@ public class LaneTest {
 		Car car2 = tester.getFirst();
 		assertTrue(car1 == car2);
 		assertTrue(tester.getFirst() == null);
+		fail("getFirst() not working correctly.");
 	}
 	
 	@Test
 	public void testLastFree() {
 		Lane tester = new Lane(10);
 		assertTrue(tester.lastFree());
+		fail("lastFree() not working.");
 		
 	}
 

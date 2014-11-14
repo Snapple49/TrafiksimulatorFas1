@@ -13,6 +13,7 @@ public class TrafficSystemTest {
 		testSystem.step();
 		Number[] testNumberOfCars = testSystem.getStatistics();
 		assertEquals((int) testNumberOfCars[0], 2);
+		fail("step() not creating a car every time at intensity 1.");
 	}
 	
 	@Test //Random included, may be unsuccessful but is succesfull most of the time.
@@ -49,6 +50,7 @@ public class TrafficSystemTest {
 				
 		
 		assertTrue( bool1 || bool2 || bool3 );
+		fail("COULD BE WORKING CORRECTLY! Randomness is included in the test, but if this is faulty, the leftintensity is not working correctly. ");
 		
 		
 	}
@@ -62,6 +64,7 @@ public class TrafficSystemTest {
 			i++;
 		}
 		testSystem.step();
+		fail("Not throwing Exception when long and straight lane is full.");
 	}
 	
 	@Test(expected=RuntimeException.class)
@@ -74,6 +77,7 @@ public class TrafficSystemTest {
 			i++;
 		}
 		testSystem.step();
+		fail("Not throwing Exception when long and left lane is full.");
 	}
 	
 	@Test
@@ -92,5 +96,6 @@ public class TrafficSystemTest {
 			falseIfSuccessful = true;
 		}
 		assertFalse(falseIfSuccessful);
+		fail("System not working for big values of seconds (5000).");
 	}
 }
