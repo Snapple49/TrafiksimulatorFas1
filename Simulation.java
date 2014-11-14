@@ -63,7 +63,7 @@ public static void simulate(TrafficSystem ts) {
     	
     	do{
     		try {
-    			System.out.println("Please enter how you want to enter the values for the simulation:\n1: Enter them yourself.\n2: Randomize them\n3: Read them from a file.");
+    			System.out.println("Please enter how you want to enter the values for the simulation:\n1: Enter them yourself.\n2: Use standard values.\n3: Read them from a file.");
         		choice = sc.nextInt();
     		}
     		catch (java.util.InputMismatchException e) {

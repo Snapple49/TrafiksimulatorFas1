@@ -85,6 +85,6 @@ public class LaneTest {
 		assertTrue(tester.lastFree());
 		
 	}
-	 //* skriv test för toString
+
 
 }

@@ -58,8 +58,8 @@ public class TrafficSystem {
 		leftLane = new Lane(5);
 		straightLight = new Light(10, 3);
 		leftLight = new Light(10, 5);
-		intensity = 1;
-		leftIntensity = 0;
+		intensity = 2;
+		leftIntensity = 3;
 	}
 
 	/**
