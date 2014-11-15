@@ -1,27 +1,24 @@
-
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class Car represents the cars in the Traffic System. It provides two attributes, and both of them are ints. One represents the time when the Car was born and the other represents the destination for the Car. The class also provides methods for getting the born time and the destination. 
+ * The Class Car represents the cars in the Traffic System. The class provides methods for getting the born time and the destination of the cars. 
  */
 public class Car {
 	
 	/**
-	 * The Class BadDestination extends extends IndexOutOfBoundsException (@see java.lang.IndexOutOfBoundsException()) and is used when trying to create a Car with a non-legitimate destination. 
+	 * Thrown when trying to create a Car with a non-valid destination. Extends IndexOutOfBoundsException.
 	 */
-	protected class BadDestination extends IndexOutOfBoundsException{
+	protected class BadCarDestinationException extends IndexOutOfBoundsException{
 		
 		/**
-		 * Instantiates a new bad destination.
+		 * Instantiates a new BadDestination with error message errormsg.
 		 *
-		 * @param errormsg the errormsg
+		 * @param errormsg the errormsg is printed to the error stream.
 		 */
-		public BadDestination(String errormsg){
+		public BadCarDestinationException(String errormsg){
 			System.err.println(errormsg);
 		}
 	}
 	
-    /** The born time. */
+    /** The the time Car was born. */
     private int bornTime;
     
     /** The destination. 1 for forward, 2 for left turn. */
@@ -29,8 +26,9 @@ public class Car {
 
     
     /**
-     * Instantiates a new car.
+     * Instantiates a new Car object with specified born time and destinaion.
      *
+     * @throws BadCarDestinationException if destination is anything else than integers 1 or 2.
      * @param bornTime the born time
      * @param dest the destination
      */
@@ -40,7 +38,7 @@ public class Car {
     		this.dest = dest;
     	}
     	else 
-    		throw new BadDestination("Car destination is out of bounds! Has to be 1 or 2");
+    		throw new BadCarDestinationException("Car destination is out of bounds! Has to be 1 or 2");
     		
     	
     }
@@ -48,7 +46,7 @@ public class Car {
     /**
      * Gets the born time of Car.
      *
-     * @return the born time
+     * @return the born time int.
      */
     public int getBornTime() {
 	return this.bornTime;
@@ -57,7 +55,7 @@ public class Car {
     /**
      * Gets the destination of Car.
      *
-     * @return the destination
+     * @return the destination int.
      */
     public int getDest() {
 	return this.dest;

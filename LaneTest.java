@@ -37,7 +37,7 @@ public class LaneTest {
 		try {
 		tester.putLast(car3);
 		}
-		catch (Lane.OverflowException e) {
+		catch (Lane.LaneOverflowException e) {
 			testVar = 1;
 		}
 		assertTrue(testVar == 1);		
@@ -60,7 +60,7 @@ public class LaneTest {
 		try {
 			tester.putLast(car3);
 			}
-			catch (Lane.OverflowException e) {
+			catch (Lane.LaneOverflowException e) {
 				testVar = 1;
 			}
 		

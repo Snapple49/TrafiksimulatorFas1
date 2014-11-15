@@ -2,18 +2,19 @@ import java.util.Scanner;
 import java.util.Properties;
 import java.util.InputMismatchException;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class TrafficSystem represents the actual traffic system with all components. It contains methods for stepping the whole system forward in time, different ways of creating a TrafficSystem object and gathering and printing statistics for a simulation of the system.
+ * The Class TrafficSystem represents the actual traffic system with all components. It contains methods for stepping the whole system forward in time, different ways of creating a TrafficSystem object and gathering and printing statistics for cars in the system.
  * 
  * @author Oliver Stein & Alexander Lind
  * 
  */
+	
 public class TrafficSystem {
 
 
-	/** The long lane. */
-	private Lane  longLane;
+	/** The first lane. */
+	private Lane  firstLane;
 
 	/** The straight lane. */
 	private Lane  straightLane;
@@ -39,21 +40,21 @@ public class TrafficSystem {
 	/** The total cars out. */
 	private float totalCarsOut;
 
-	/** The total time. */
+	/** The sum of total time all cars have spent in system. */
 	private float totalTime;
 
 
-	/** The max time. */
+	/** The maximal time a car spent in system.  */
 	private int maxTime;
 
-	/** The time. */
+	/** The time of the TrafficSystem. */
 	private int time = 0;
 
 	/**
 	 * Instantiates a new traffic system with preset default values.
 	 */
 	public TrafficSystem() { 
-		longLane = new Lane(20);
+		firstLane = new Lane(20);
 		straightLane = new Lane(5);
 		leftLane = new Lane(5);
 		straightLight = new Light(10, 3);
@@ -72,7 +73,7 @@ public class TrafficSystem {
 		leftIntensity = arr[1];
 		straightLight = new Light(arr[2], arr[3]);
 		leftLight = new Light(arr[2], arr[4]);
-		longLane = new Lane(arr[5]);
+		firstLane = new Lane(arr[5]);
 		straightLane = new Lane(arr[6]);
 		leftLane = new Lane(arr[6]);
 	}
@@ -188,14 +189,14 @@ public class TrafficSystem {
 		this.leftIntensity = leftIntensity;
 		this.straightLight = new Light(period, greenPeriodStraight);
 		this.leftLight = new Light(period, greenPeriodTurn);
-		this.longLane = new Lane(longLane);
+		this.firstLane = new Lane(longLane);
 		this.straightLane = new Lane(shortLane);
 		this.leftLane = new Lane(shortLane);
 
 	}
 
 	/**
-	 * Creates a new TrafficSystem object. Depending on the input, the values of the object are determined either with enterValues method or reading the config.properties file with getPropValues method, or just with the constructor default values.
+	 * Creates a new TrafficSystem object. Depending on the input, the values of the object's fields are determined either with enterValues method or reading the config.properties file with getPropValues method, or just with the constructor default values.
 	 *
 	 * @param input the input determines how to construct the TrafficSystem: 1 for entering values, 2 for reading from file, otherwise default constructor.
 	 * @return TrafficSystem object created by using specified method.
@@ -221,20 +222,18 @@ public class TrafficSystem {
 
 
 	/**
-	 * Gets the time.
+	 * Gets the time of the TrafficSystem.
 	 *
-	 * @return the time
+	 * @return the time in integer form.
 	 */
 	public int getTime(){
 		return this.time;
 	}
 
 	/**
-	 * Step.
+	 * Steps all components of the system forwards in timeline, adds new Car objects to the system as specified and creates statistical data. Uses components' native step methods.
 	 */
 	public void step() {
-		// Stega systemet ett tidssteg m h a komponenternas step-metoder
-		// Skapa bilar, lägg in och ta ur på de olika Lane-kompenenterna
 		Car statCar1 = null;
 		Car statCar2 = null;
 
@@ -254,57 +253,57 @@ public class TrafficSystem {
 		}
 		leftLane.step(green2);
 
-		if(!(longLane.posFree(0))){
-			switch (longLane.firstCar().getDest()) {
+		if(!(firstLane.posFree(0))){
+			switch (firstLane.firstCar().getDest()) {
 			case 1: 
 				if(straightLane.lastFree()){
-					straightLane.putLast(longLane.getFirst());
-					longLane.step();
+					straightLane.putLast(firstLane.getFirst());
+					firstLane.step();
 				}else{
-					longLane.step(false);
+					firstLane.step(false);
 				}
 				break;
 
 			case 2:
 				if(leftLane.lastFree()){
-					leftLane.putLast(longLane.getFirst());
-					longLane.step();
+					leftLane.putLast(firstLane.getFirst());
+					firstLane.step();
 				}else{
-					longLane.step(false);
+					firstLane.step(false);
 				}
 				break;
 
 			}
 
 		}else{    		
-			longLane.step();
+			firstLane.step();
 		}    	
 		if(time % intensity == 0){
 			totalCarsIn++;
 			try{
 				int nextDest = (int ) (Math.random()*leftIntensity) + 1;
 				if(leftIntensity > 0){
-					if(nextDest % leftIntensity == 0){
+					if(nextDest == leftIntensity){
 						Car nextCar = new Car(this.time, 2);    				
-						longLane.putLast(nextCar);
+						firstLane.putLast(nextCar);
 					}else{
 						Car nextCar = new Car(this.time, 1);    				    				
-						longLane.putLast(nextCar);
+						firstLane.putLast(nextCar);
 					}
 				}else if(leftIntensity == 0){
 					Car nextCar = new Car(this.time, 1);    				    				
-					longLane.putLast(nextCar);
+					firstLane.putLast(nextCar);
 				}else{
-					if(nextDest % leftIntensity == 0){
+					if(nextDest == leftIntensity){
 						Car nextCar = new Car(this.time, 1);    				
-						longLane.putLast(nextCar);
+						firstLane.putLast(nextCar);
 					}else{
 						Car nextCar = new Car(this.time, 2);    				    				
-						longLane.putLast(nextCar);
+						firstLane.putLast(nextCar);
 					}
 				}
 			}
-			catch (Lane.OverflowException e){
+			catch (Lane.LaneOverflowException e){
 				throw new RuntimeException("Long lane overloaded, cars cannot enter");
 			}
 		}
@@ -319,9 +318,9 @@ public class TrafficSystem {
 	}
 
 	/**
-	 * Write statistics.
+	 * Updates the total time cars has spent in the current TrafficSystem object.
 	 *
-	 * @param car the car
+	 * @param car the Car object whose time spent in the system is checked.
 	 */
 	public void writeStatistics(Car car) {
 
@@ -333,12 +332,16 @@ public class TrafficSystem {
 	}
 	
 	/**
-	 * Gets the statistics.
+	 * Gets the statistics of the traffic system as a Number array. Indexes 0-3;
+	 * 0 is totalCarsIn, 
+	 * 1 is totalCarsOut, 
+	 * 2 is maxTime,
+	 * 3 is totalTime
 	 *
-	 * @return the statistics
+	 * @return the statistics as a Number array.
 	 */
-	public Number[] getStatistics() { 
-		Number[] stats = {0, 0, 0, 0};
+	protected Number[] getStatistics() { 
+		Number[] stats = new Number[4];
 		stats[0] = this.totalCarsIn;
 		stats[1] = (int) this.totalCarsOut;
 		stats[2] = this.maxTime;
@@ -347,7 +350,7 @@ public class TrafficSystem {
 	}
 
 	/**
-	 * Prints the statistics.
+	 * Prints the statistics to standard out stream.
 	 */
 	public void printStatistics() {
 		System.out.println("Statistics:");
@@ -356,15 +359,14 @@ public class TrafficSystem {
 		}
 		else {
 			System.out.println("Average time: " + (this.totalTime / this.totalCarsOut));
-			System.out.println("Max time: " + this.maxTime);
-			System.out.println("Number of Cars that have been inserted in the system: " + this.totalCarsIn);
+			System.out.println("Max time spent in system: " + this.maxTime);
+			System.out.println("Number of Cars that have entered the system: " + this.totalCarsIn);
 			System.out.println("Number of Cars that have left the system: " + (int) this.totalCarsOut);
 		}
 	}
 
-	/**
-	 * Prints the.
-	 */
+	// Ta bort??? 
+	
 	public void print() {
 		// Skriv ut en grafisk representation av kösituationen
 		// med hjälp av klassernas toString-metoder
@@ -374,15 +376,11 @@ public class TrafficSystem {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() { //mal = polymorfism
-		return "r0 = " + this.longLane.toString() + "\nr1= " + this.straightLane.toString() + "\nr2= " + this.leftLane.toString() + "\ns1= " + this.straightLight.toString() + "\ns2= " + this.leftLight.toString() + ")";
+		return "r0 = " + this.firstLane.toString() + "\nr1= " + this.straightLane.toString() + "\nr2= " + this.leftLane.toString() + "\ns1= " + this.straightLight.toString() + "\ns2= " + this.leftLight.toString() + ")";
 	}
 
 
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
+
 	public static void main(String []args){
 
 	}

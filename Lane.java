@@ -1,23 +1,23 @@
 /**
- * Lane represents a lane in the Traffic System. The lane consists of an array of Cars of specified length. The class provides methods for moving the cars in, to or from the object.  
+ * The Lane class represents a lane in the Traffic System. The lane consists of an array of Cars of specified length. The class provides methods for moving the cars in, to or from the lane.  
  */
 public class Lane {
 
     /**
-     * The Class OverflowException extends RuntimeException (@see java.lang.RuntimeException()) and is used when trying to add a Car into an already full Lane. 
+     * Thrown to indicate attempt to put a car into a Lane which already has a car in last spot. Extends RuntimeException.
      */
-	protected class OverflowException extends RuntimeException {
+	protected class LaneOverflowException extends RuntimeException {
     	/**
-         * Instantiates a new overflow exception.
+         * Instantiates a new overflow exception with error message errormsg.
          *
-         * @param errormsg the errormsg
+         * @param errormsg the errormsg to be printed to error stream.
          */
-        public OverflowException(String errormsg){
+        public LaneOverflowException(String errormsg){
     		System.err.println(errormsg);
     	}
     }
 
-    /** The lane. */
+    /** The array of Car objects. Forward means decreasing index. */
     private Car[] theLane;
 
     /**
@@ -30,7 +30,7 @@ public class Lane {
     }
 
     /**
-     * Step moves, if possible, all Cars in Lane one step forward (except the Car at position 0). If there is a car at position 0, it is removed.  
+     * Step moves all Cars in Lane one step forward (except the Car at position 0). If there is a car at position 0, it is removed.  
      */
     public void step() {
     	this.getFirst();
@@ -42,7 +42,7 @@ public class Lane {
     }
 	
 	/**
-	 * Step behaves like the instance of step without parameters if isGreen is true. If isGreen is false, it does not remove the Car at position 0 (if there is one) and moves Cars forward where there is space. 
+	 * Step with boolean behaves like step without parameters if isGreen is true. If isGreen is false, it does not remove the Car at position 0 (if there is one) and moves Cars forward where there is space. 
 	 *
 	 * @param isGreen is a boolean. If true, the light is green. 
 	 */
@@ -82,7 +82,7 @@ public class Lane {
     }
 
     /**
-     * Checks whether the given position is free or not. 
+     * Checks whether the given position in Lane is null or not. 
      *
      * @param pos the position.
      * @return true, if pos is free, else false. 
@@ -92,9 +92,9 @@ public class Lane {
     }
 
     /**
-     * Last free checks whether the last position of Lane is empty.
+     * Last free checks whether the last position of Lane is null.
      *
-     * @return true, if the last position is free, else false. 
+     * @return true, if the last index of Lane is null, else false. 
      */
     public boolean lastFree() {
 	return (theLane[theLane.length - 1] == null);
@@ -103,20 +103,16 @@ public class Lane {
     /**
      * Put a Car in the last place of Lane (if possible).  
      *
-     * @param c the Car.
-     * @throws OverflowException the overflow exception is used when the last position of Lane is not empty. 
+     * @param c the Car to be put in the Lane.
+     * @throws LaneOverflowException the overflow exception is thrown when the last position of Lane is not empty. 
      */
-    public void putLast(Car c) throws OverflowException {
+    public void putLast(Car c) throws LaneOverflowException {
     	if (theLane[theLane.length - 1] == null) {
     		theLane[theLane.length - 1] = c;
     	}else 
-    		throw new OverflowException("Could not put a car in lane");    	
+    		throw new LaneOverflowException("Could not put a car in lane");    	
     }
 
-    
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     public String toString() {
     	String returnString = "Lane:\n";
     	for (int i = 0; i < theLane.length; i++) {
@@ -129,6 +125,4 @@ public class Lane {
 		
 		return returnString;
     }
-
-
 }

@@ -92,7 +92,7 @@ public class TrafficSystemTest {
 				i++;
 			}
 		}
-		catch (Lane.OverflowException e) {
+		catch (Lane.LaneOverflowException e) {
 			falseIfSuccessful = true;
 		}
 		assertFalse(falseIfSuccessful);

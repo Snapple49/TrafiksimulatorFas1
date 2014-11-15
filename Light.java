@@ -4,47 +4,45 @@
  * @author Oliver Stein & Alexander Lind
  * 
  */
-/*
- * 
- * Hej
- */
 public class Light {
 
-	public class greenThresholdException extends IndexOutOfBoundsException{		
-		private greenThresholdException(String message) {
-			super(message);
+	/**
+	 * Thrown to indicate that specified values for Light are invalid.
+	 */
+	private class InvalidValueException extends IndexOutOfBoundsException{		
+		
+		/**
+		 * Instantiates a new invalid value exception with error message errormsg.
+		 *
+		 * @param errormsg the message to be printed to standard error stream.
+		 */
+		private InvalidValueException(String errormsg) {
+			super(errormsg);
 		}
 		
-	}
-
-	private class periodException extends IndexOutOfBoundsException{
-		private periodException(String message) {
-			super(message);
-		}
 	}
 
 	/** The period of the traffic system, determines length of internal timecycle. */
 	private int period;
 
 	/** The internal time of the traffic light, should reset when reaching period. */
-	private int time;  // Intern klocka: 0, 1, ... period-1, 0, 1 ...
+	private int time;  
 
 	/** The threshold for when traffic signal is green. */
-	private int greenThreshold; // Signalen gr�n n�r time<green 
+	private int greenThreshold;
 
 	/**
-	 * Instantiates a new Light with specified period and green threshold.
+	 * Instantiates a new Light with specified period and greenThreshold.
 	 *
-	 * @param period specify the period
-	 * @param greenThreshold specify the greenThreshold
-	 * @throws greenThresholdException 
+	 * @param period specify the period.
+	 * @param greenThreshold specify the greenThreshold.
 	 */
 	public Light(int period, int greenThreshold) { 
 		if (greenThreshold < 0) {
-			throw new periodException("greenThreshold must be bigger than 0.");
+			throw new InvalidValueException("greenThreshold must be bigger than 0.");
 		}
 		if (period < 0) {
-			throw new periodException("period must be bigger than 0.");
+			throw new InvalidValueException("period must be bigger than 0.");
 		}
 		else {
 		this.period = period;
@@ -71,17 +69,15 @@ public class Light {
 		}else{
 			this.time = 0;
 		}	
-		// Stegar fram klocka ett steg
 	}
 
 	/**
-	 * Checks if time is below greenThreshold to see if Light signal is green.
+	 * Checks if Light signal is green.
 	 *
 	 * @return true if signal is green, else false.
 	 */
 	public boolean isGreen()   {
 		return (this.time < this.greenThreshold);
-		// Returnerar true om time<green, annars false
 	}
 
 

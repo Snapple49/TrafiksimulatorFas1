@@ -1,18 +1,18 @@
 import java.util.Scanner;
-// TODO: Auto-generated Javadoc
-/**Simulation program for gathering test data from a traffic situation. Enter data yourself, use standard data or read data for a file for your traffic system. 
+
+/** Class for starting and maintaining a simulation of a traffic system with TrafficSystem objects. Has methods for handling input for starting a simulation and running the simulation.
  * 
  *  
- * @author Oliver & Alex
+ * @author Oliver Stein & Alexander Lind
  *
  */
 
 
-public class Simulation {
+abstract class Simulation {
 
 	
 /**
- * Request the user to enter max time, and if something that is not an int is entered, the user will have to try again.  
+ * Request the user to enter maximum time to run simulation for, will retry until a number above 0 is written.  
  *
  * @return the max time entered by the user. 
  */
@@ -39,9 +39,9 @@ public static int enterMaxTime() {
 
 	
 /**
- * Simulates the system. It prints out the current statistics before stepping the system one step. 
+ * Simulates the system by printing out the current statistics and stepping the system one step. 
  *
- * @param system the traffic system. 
+ * @param system the TrafficSystem to simulate. 
  */
 public static void simulate(TrafficSystem system) {
 		System.out.print(system.toString());
@@ -51,11 +51,9 @@ public static void simulate(TrafficSystem system) {
 
 
     /**
-     * The main method. Asks the user for which method (1 = Enter them yourself, 2 = Default values, 3 = Read them from a file) of entering the values and starts the simulation. 
-     *
-     * @param args the arguments
+     * The main method. Asks the user for which method (1 = Enter them yourself, 2 = Default values, 3 = Read them from a file) of entering the values and starts the simulation.
      */
-    public static void main(String [] args) {
+    public static void main() {
     	Scanner sc = new Scanner(System.in);
     	int choice = 0;
     	
@@ -73,8 +71,8 @@ public static void simulate(TrafficSystem system) {
     	TrafficSystem ts = TrafficSystem.readParameters(choice);
     	while(ts.getTime() < maxTime) {
 			simulate(ts);
-			ts.printStatistics();
 		}
+    	ts.printStatistics();
     	sc.close();	
     }
     

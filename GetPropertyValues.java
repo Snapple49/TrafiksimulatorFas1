@@ -18,7 +18,7 @@ public class GetPropertyValues {
 		/**
 		 * Instantiates a new BadFileDataException with the error message errormsg. 
 		 * 
-		 * @param errormsg the error message. errormsg is printed to standard error outstream.
+		 * @param errormsg the error message. errormsg is printed to standard error stream.
 		 */
 		public BadFileDataException(String errormsg){
 			System.err.println(errormsg);
@@ -27,8 +27,8 @@ public class GetPropertyValues {
 
 	/**
 	 * Creates a Properties object, and tries loading the file config.properties to it. Returns the Properties object if the file was successfully loaded and does not contain invalid data.
-	 * @throws BadFileDataException.
-	 * @return a Properties object.
+	 * @throws BadFileDataException if any values are non-integers or invalid integers.
+	 * @return an int array with values read from config.properties.
 	 */
 	public int[] getPropValues() {
 		Properties prop = new Properties();

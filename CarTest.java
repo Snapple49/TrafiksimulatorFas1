@@ -35,7 +35,7 @@ public class CarTest {
 		try {
 			new Car(1,5);
 		}
-		catch (Car.BadDestination e) {
+		catch (Car.BadCarDestinationException e) {
 			testVar = 1;
 		}
 		assertTrue(testVar == 1); 
