@@ -53,7 +53,7 @@ public static void simulate(TrafficSystem system) {
     /**
      * The main method. Asks the user for which method (1 = Enter them yourself, 2 = Default values, 3 = Read them from a file) of entering the values and starts the simulation.
      */
-    public static void main() {
+    public static void main(String[] args) {
     	Scanner sc = new Scanner(System.in);
     	int choice = 0;
     	

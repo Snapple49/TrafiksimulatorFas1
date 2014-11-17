@@ -365,24 +365,11 @@ public class TrafficSystem {
 		}
 	}
 
-	// Ta bort??? 
-	
-	public void print() {
-		// Skriv ut en grafisk representation av kösituationen
-		// med hjälp av klassernas toString-metoder
-	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() { //mal = polymorfism
 		return "r0 = " + this.firstLane.toString() + "\nr1= " + this.straightLane.toString() + "\nr2= " + this.leftLane.toString() + "\ns1= " + this.straightLight.toString() + "\ns2= " + this.leftLight.toString() + ")";
-	}
-
-
-
-	public static void main(String []args){
-
 	}
 
 }
