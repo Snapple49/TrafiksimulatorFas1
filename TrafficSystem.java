@@ -307,12 +307,13 @@ public class TrafficSystem {
 				throw new RuntimeException("Long lane overloaded, cars cannot enter");
 			}
 		}
-		if (statCar1 != null) {
-			this.writeStatistics(statCar1);
-			this.totalCarsOut++;
-		}
-		if (statCar2 != null) {
-			this.writeStatistics(statCar2);
+		updateStatsCar(statCar1);
+		updateStatsCar(statCar2);
+	}
+
+	private void updateStatsCar(Car statCar) {
+		if (statCar != null) {
+			this.writeStatistics(statCar);
 			this.totalCarsOut++;
 		}
 	}
