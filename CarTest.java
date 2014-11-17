@@ -26,7 +26,7 @@ public class CarTest {
 	public void testToString() {
 		Car tester = new Car(5,1);
 		assertEquals("Car(bornTime=5, dest=1)", tester.toString());
-		fail("ToString not correct.");
+		
 	}
 	
 	@Test
@@ -39,7 +39,7 @@ public class CarTest {
 			testVar = 1;
 		}
 		assertTrue(testVar == 1); 
-		fail("Exception BadDestination is not thrown when it is supposed to.");
+		
 	}
 
 }

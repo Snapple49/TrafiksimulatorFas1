@@ -9,7 +9,7 @@ public class LightTest {
 	public void testGetTime() {
 		Light tester = new Light(5,5);
 		assertEquals(0, tester.getTime());
-		fail("getTime() not getting the correct time.");
+		
 	}
 	
 	@Test
