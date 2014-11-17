@@ -22,7 +22,7 @@ public class LightTest {
 		}
 		
 		assertEquals(100, tester.getTime());
-		fail("step() not working correctly.");
+		
 	}
 	@Test
 	public void testPeriodStep() {
@@ -30,7 +30,7 @@ public class LightTest {
 		tester.step();
 		tester.step();
 		assertEquals(0, tester.getTime());
-		fail("Internal time not resetting correctly.");
+		
 		
 	}
 	@Test
@@ -39,13 +39,13 @@ public class LightTest {
 		assertEquals("isGreen = True", true, tester.isGreen());
 		tester.step();
 		assertEquals("isGreen = False", false, tester.isGreen());
-		fail("isGreen not working correctly.");
+		
 	}
 	@Test
 	public void testToString() {
 		Light tester = new Light(1,1);
 		assertEquals("Light(period=1, time=0, green=1)", tester.toString());
-		fail("toString() not working correctly.");
+		
 	}
 
 }

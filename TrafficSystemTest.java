@@ -87,7 +87,7 @@ public class TrafficSystemTest {
 	
 	@Test
 	public void testAlwaysGreen() {
-		int[] testValues = {1,2,200,199,199,10,10};
+		int[] testValues = {1,2,200,200,200,10,10};
 		TrafficSystem testSystem = new TrafficSystem(testValues);
 		int i = 0;
 		boolean falseIfSuccessful = false;
