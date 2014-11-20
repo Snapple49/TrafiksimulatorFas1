@@ -10,7 +10,7 @@ public class Light {
 	 * Thrown to indicate that specified values for Light are invalid.
 	 */
 	private class InvalidValueException extends IndexOutOfBoundsException{		
-		
+
 		/**
 		 * Instantiates a new invalid value exception with error message errormsg.
 		 *
@@ -19,7 +19,7 @@ public class Light {
 		private InvalidValueException(String errormsg) {
 			super(errormsg);
 		}
-		
+
 	}
 
 	/** The period of the traffic system, determines length of internal timecycle. */
@@ -45,8 +45,8 @@ public class Light {
 			throw new InvalidValueException("period must be bigger than 0.");
 		}
 		else {
-		this.period = period;
-		this.greenThreshold = greenThreshold;
+			this.period = period;
+			this.greenThreshold = greenThreshold;
 		}
 	}
 
